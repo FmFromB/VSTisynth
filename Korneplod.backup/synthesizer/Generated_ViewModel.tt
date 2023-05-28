@@ -1,0 +1,245 @@
+﻿﻿using System;
+using System.ComponentModel;
+using System.Windows.Input;
+using System.Windows.Threading;
+
+<#
+  // Model defines what properties and commands are generated
+
+  var properties = new []
+    {
+      LP("double"     , "Volume"              , @"$""{(int)(Volume * 100.0)}%"""              ),
+      P ("float[]"    , "FrequencyAmplitudes"                                                 ),
+      P ("float[]"    , "Waveform"                                                            ),
+
+      LP("float"      , "Attack"              , @"$""{(int)(Attack * 1000.0)} ms"""           ),
+      LP("float"      , "Decay"               , @"$""{(int)(Decay * 1000.0)} ms"""            ),
+      LP("float"      , "Sustain"             , @"$""{(int)(Sustain * 100.0)}%"""             ),
+      LP("float"      , "Release"             , @"$""{(int)(Release * 1000.0)} ms"""          ),
+
+      LP("float"      , "Attack2"              , @"$""{(int)(Attack2 * 1000.0)} ms"""         ),
+      LP("float"      , "Decay2"               , @"$""{(int)(Decay2 * 1000.0)} ms"""          ),
+      LP("float"      , "Sustain2"             , @"$""{(int)(Sustain2 * 100.0)}%"""           ),
+      LP("float"      , "Release2"             , @"$""{(int)(Release2 * 1000.0)} ms"""        ),
+
+      LP("float"      , "Attack3"              , @"$""{(int)(Attack3 * 1000.0)} ms"""         ),
+      LP("float"      , "Decay3"               , @"$""{(int)(Decay3 * 1000.0)} ms"""          ),
+      LP("float"      , "Sustain3"             , @"$""{(int)(Sustain3 * 100.0)}%"""           ),
+      LP("float"      , "Release3"             , @"$""{(int)(Release3 * 1000.0)} ms"""        ),
+
+      LP("int"        , "CutOff"              , @"$""{CutOff} Hz"""                           ),
+      LP("float"      , "Q"                   , @"$""{((int)(Q * 100.0f))/ 100.0f}"""         ),
+
+      LP("int"        , "TremoloFreq"         , @"$""{TremoloFreqMult * TremoloFreq} Hz"""    ),
+      LP("float"      , "TremoloGain"         , @"$""{Math.Max(0, TremoloGain) * 100.0f}%"""  ),
+      LP("int"        , "TremoloFreqMult"     , @"$""{TremoloFreqMult}"""                     ),
+
+      LP("float"      , "ChorusWidth"         , @"$""{((int)(ChorusWidth * 100.0f))/100.0f}"""),
+      LP("float"      , "ChorusSweep"         , @"$""{((int)(ChorusSweep * 100.0f))/100.0f}"""),
+      LP("float"      , "ChorusDelay"         , @"$""{((int)(ChorusDelay * 100.0f))/100.0f}"""),
+
+      LP("float"      , "PhaserDry"           , @"$""{PhaserDry}"""                           ),
+      LP("float"      , "PhaserWet"           , @"$""{PhaserWet}"""                           ),
+      LP("float"      , "PhaserFeedback"      , @"$""{PhaserFeedback}"""                      ),
+      LP("float"      , "PhaserFreq"          , @"$""{PhaserFreq}"""                          ),
+      LP("float"      , "PhaserWidth"         , @"$""{PhaserWidth}"""                         ),
+      LP("float"      , "PhaserSweep"         , @"$""{PhaserSweep}"""                         ),
+
+      LP("float"      , "Level1"              , @"$""{(int)(Level1 * 100.0)}%"""              ),
+      LP("float"      , "Level2"              , @"$""{(int)(Level2 * 100.0)}%"""              ),
+      LP("float"      , "Level3"              , @"$""{(int)(Level3 * 100.0)}%"""              ),
+    };
+
+  var commands = new []
+    {
+      C ("OnCommand"  ),
+      C ("OffCommand" ),
+    };
+
+#>
+
+
+<#
+  // The template generates the code from the model
+#>
+
+namespace synthesizer
+{
+    public partial class MainWindowViewModel : INotifyPropertyChanged
+    {
+        readonly Dispatcher _dispatcher;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+<#
+  foreach (var prop in properties)
+  {
+#>
+        // --------------------------------------------------------------------
+        // BEGIN_PROPERTY: <#=prop.Name#> (<#=prop.Type#>)
+        // --------------------------------------------------------------------
+        <#=prop.Type#> _<#=prop.Name#> = <#=prop.DefaultValue#>;
+
+        void Raise_<#=prop.Name#> ()
+        {
+          OnPropertyChanged ("<#=prop.Name#>");
+<#
+  if (prop.LabelValue.Length > 0)
+  {
+#>
+          OnPropertyChanged ("<#=prop.Name#>Label");
+<#
+  }
+#>
+        }
+
+<#
+  if (prop.LabelValue.Length > 0)
+  {
+#>
+        public string <#=prop.Name#>Label => <#=prop.LabelValue#>;
+
+<#
+  }
+#>
+        public <#=prop.Type#> <#=prop.Name#>
+        {
+            get { return _<#=prop.Name#>; }
+            set
+            {
+                if (_<#=prop.Name#> == value)
+                {
+                    return;
+                }
+
+                var prev = _<#=prop.Name#>;
+
+                _<#=prop.Name#> = value;
+
+                Changed_<#=prop.Name#> (prev, _<#=prop.Name#>);
+
+                Raise_<#=prop.Name#> ();
+            }
+        }
+        // --------------------------------------------------------------------
+        partial void Changed_<#=prop.Name#> (<#=prop.Type#> prev, <#=prop.Type#> current);
+        // --------------------------------------------------------------------
+        // END_PROPERTY: <#=prop.Name#> (<#=prop.Type#>)
+        // --------------------------------------------------------------------
+
+<#
+  }
+#>
+
+<#
+  foreach (var cmd in commands)
+  {
+#>
+        // --------------------------------------------------------------------
+        // BEGIN_COMMAND: <#=cmd.Name#>
+        // --------------------------------------------------------------------
+        readonly UserCommand _<#=cmd.Name#>;
+
+        bool CanExecute<#=cmd.Name#> ()
+        {
+          bool result = false;
+          CanExecute_<#=cmd.Name#> (ref result);
+
+          return result;
+        }
+
+        void Execute<#=cmd.Name#> ()
+        {
+          Execute_<#=cmd.Name#> ();
+        }
+
+        public ICommand <#=cmd.Name#> { get { return _<#=cmd.Name#>;} }
+        // --------------------------------------------------------------------
+        partial void CanExecute_<#=cmd.Name#> (ref bool result);
+        partial void Execute_<#=cmd.Name#> ();
+        // --------------------------------------------------------------------
+        // END_COMMAND: <#=cmd.Name#>
+        // --------------------------------------------------------------------
+
+<#
+  }
+#>
+
+        partial void Constructed ();
+
+        public MainWindowViewModel (Dispatcher dispatcher)
+        {
+          _dispatcher = dispatcher;
+<#
+  foreach (var cmd in commands)
+  {
+#>
+          _<#=cmd.Name#> = new UserCommand (CanExecute<#=cmd.Name#>, Execute<#=cmd.Name#>);
+<#
+  }
+#>
+
+          Constructed ();
+        }
+
+        void ResetCanExecute ()
+        {
+<#
+  foreach (var cmd in commands)
+  {
+#>
+          _<#=cmd.Name#>.RefreshCanExecute ();
+<#
+  }
+#>
+        }
+
+        void Dispatch(Action action)
+        {
+          _dispatcher.BeginInvoke(action);
+        }
+
+        protected virtual void OnPropertyChanged (string propertyChanged)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyChanged));
+        }
+    }
+}
+
+<#+
+  class PropertyInfo
+  {
+    public readonly string Type         ;
+    public readonly string Name         ;
+    public readonly string DefaultValue ;
+    public readonly string LabelValue   ;
+
+    public PropertyInfo (string type, string name, string defaultValue, string labelValue)
+    {
+      Type          = type          ?? "<NoType>";
+      Name          = name          ?? "<NoName>";
+      DefaultValue  = defaultValue  ?? $"default";
+      LabelValue    = labelValue    ?? ""        ;
+    }
+  }
+
+  static PropertyInfo P (string type, string name, string defaultValue = null) =>
+    new PropertyInfo (type, name, defaultValue, null);
+
+  static PropertyInfo LP (string type, string name, string labelValue, string defaultValue = null) =>
+    new PropertyInfo (type, name, defaultValue, labelValue);
+
+  class CommandInfo
+  {
+    public readonly string Name         ;
+
+    public CommandInfo (string name)
+    {
+      Name          = name          ?? "<NoName>";
+    }
+  }
+
+  static CommandInfo C (string name) =>
+    new CommandInfo (name);
+
+#>

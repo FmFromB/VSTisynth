@@ -1,0 +1,333 @@
+﻿using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Threading;
+
+using NAudio.Wave.SampleProviders;
+
+<#
+  // Model defines what properties and commands are generated
+
+  var properties = new []
+    {
+      P ("Visibility" , "MidiVisibility"                                                      ),
+      P ("bool"       , "MidiEnabled"                                                         ),
+      P ("string"     , "MidiDevice"                                                          ),
+      C ("string"     , "MidiDevices"                                                         ),
+
+      P ("float[]"    , "FrequencyAmplitudes"                                                 ),
+      P ("float[]"    , "Waveform"                                                            ),
+
+      P ("bool"       , "EnableLpf"                                                           ),
+      P ("bool"       , "EnableSubOsc"                                                        ),
+      P ("bool"       , "EnableVibrato"                                                       ),
+      P ("bool"       , "EnableTremolo"                                                       ),
+
+      P ("BaseFrequency"  , "BaseFrequency"   , "BaseFrequency.A2"                            ),
+
+      P ("SignalGeneratorType"  , "WaveType1" , "SignalGeneratorType.Sin"                     ),
+
+      P ("SignalGeneratorType"  , "WaveType2" , "SignalGeneratorType.Sin"                     ),
+      P ("Octave"               , "Octave2"   , "Octave.Same"                                 ),
+      P ("Semitone"             , "Semitone2" , "Semitone.Same"                               ),
+
+      P ("SignalGeneratorType"  , "WaveType3" , "SignalGeneratorType.Sin"                     ),
+      P ("Octave"               , "Octave3"   , "Octave.Same"                                 ),
+      P ("Semitone"             , "Semitone3" , "Semitone.Same"                               ),
+
+	  P("int"                   , "MidiIn"                                                    ),
+
+      LP("double"     , "Volume"              , @"$""{(int)(Volume)}dB"""                     ),
+
+      LP("float"      , "Attack"              , @"$""{(int)(Attack * 1000.0)} ms"""           ),
+      LP("float"      , "Decay"               , @"$""{(int)(Decay * 1000.0)} ms"""            ),
+      LP("float"      , "Sustain"             , @"$""{(int)(Sustain * 100.0)}%"""             ),
+      LP("float"      , "Release"             , @"$""{(int)(Release * 1000.0)} ms"""          ),
+
+      LP("float"      , "Attack2"              , @"$""{(int)(Attack2 * 1000.0)} ms"""         ),
+      LP("float"      , "Decay2"               , @"$""{(int)(Decay2 * 1000.0)} ms"""          ),
+      LP("float"      , "Sustain2"             , @"$""{(int)(Sustain2 * 100.0)}%"""           ),
+      LP("float"      , "Release2"             , @"$""{(int)(Release2 * 1000.0)} ms"""        ),
+
+      LP("float"      , "Attack3"              , @"$""{(int)(Attack3 * 1000.0)} ms"""         ),
+      LP("float"      , "Decay3"               , @"$""{(int)(Decay3 * 1000.0)} ms"""          ),
+      LP("float"      , "Sustain3"             , @"$""{(int)(Sustain3 * 100.0)}%"""           ),
+      LP("float"      , "Release3"             , @"$""{(int)(Release3 * 1000.0)} ms"""        ),
+
+      LP("int"        , "CutOff"              , @"$""{CutOff} Hz"""                           ),
+      LP("float"      , "Q"                   , @"$""{((int)(Q * 100.0f))/ 100.0f}"""         ),
+      LP("int"        , "TremoloFreq"         , @"$""{TremoloFreqMult * TremoloFreq} Hz"""    ),
+      LP("float"      , "TremoloGain"         , @"$""{(int)(TremoloGain * 100.0f)}%"""        ),
+      LP("int"        , "TremoloFreqMult"     , @"$""x{TremoloFreqMult}"""                    ),
+      LP("float"      , "ChorusWidth"         , @"$""{((int)(ChorusWidth * 100.0f)/100.0f)}"""),
+      LP("float"      , "ChorusSweep"         , @"$""{((int)(ChorusSweep * 100.0f)/100.0f)}"""),
+      LP("float"      , "ChorusDelay"         , @"$""{((int)(ChorusDelay * 100.0f)/100.0f)}"""),
+
+      LP("float"      , "PhaserDry"           , @"$""{((int)(PhaserDry * 100.0f)/100.0f)}"""  ),
+      LP("float"      , "PhaserWet"           , @"$""{((int)(PhaserWet * 100.0f)/100.0f)}"""  ),
+      LP("float"      , "PhaserFeedback"      , @"$""{((int)(PhaserFeedback * 100.0f)/100.0f)}"""),
+      LP("float"      , "PhaserFreq"          , @"$""{((int)(PhaserFreq * 100.0f)/100.0f)}""" ),
+      LP("float"      , "PhaserWidth"         , @"$""{((int)(PhaserWidth * 100.0f)/100.0f)}"""),
+      LP("float"      , "PhaserSweep"         , @"$""{((int)(PhaserSweep * 100.0f)/100.0f)}"""),
+
+      LP("float"      , "Level1"              , @"$""{(int)(Level1)}dB"""                     ),
+      LP("float"      , "Level2"              , @"$""{(int)(Level2)}dB"""                     ),
+      LP("float"      , "Level3"              , @"$""{(int)(Level3)}dB"""                     ),
+
+      LP("int"        , "DelayMs"             , @"$""{(DelayMs)}ms"""                         ),
+      LP("float"      , "DelayFeedback"       , @"$""{(int)(DelayFeedback * 100.0)}%"""       ),
+      LP("float"      , "DelayMix"            , @"$""{(int)(DelayMix * 100.0)}%"""            ),
+      LP("float"      , "DelayDry"            , @"$""{(int)(DelayDry * 100.0)}%"""            ),
+      LP("float"      , "DelayWet"            , @"$""{(int)(DelayWet * 100.0)}%"""            ),
+
+    };
+
+  var commands = new []
+    {
+      C ("OnCommand"          ),
+      C ("OffCommand"         ),
+      C ("MidiOnCommand"      ),
+      C ("MidiOffCommand"     ),
+      C ("LoadPatchCommand"   ),
+      C ("SavePatchCommand"   ),
+    };
+
+#>
+
+
+<#
+  // The template generates the code from the model
+#>
+
+namespace synthesizer
+{
+    public partial class MainWindowViewModel : INotifyPropertyChanged
+    {
+        readonly Dispatcher _dispatcher;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+<#
+  foreach (var prop in properties)
+  {
+    if (prop.IsCollection)
+    {
+#>
+        // --------------------------------------------------------------------
+        // BEGIN_COLLECTION_PROPERTY: <#=prop.Name#> (<#=prop.Type#>)
+        // --------------------------------------------------------------------
+        ObservableCollection<<#=prop.Type#>> _<#=prop.Name#> = new ObservableCollection<<#=prop.Type#>> ();
+
+        void Raise_<#=prop.Name#> ()
+        {
+<#
+  if (prop.LabelValue.Length > 0)
+  {
+#>
+          OnPropertyChanged ("<#=prop.Name#>Label");
+<#
+  }
+#>
+        }
+
+<#
+  if (prop.LabelValue.Length > 0)
+  {
+#>
+        public string <#=prop.Name#>Label => <#=prop.LabelValue#>;
+
+<#
+  }
+#>
+        public ObservableCollection<<#=prop.Type#>> <#=prop.Name#>
+        {
+            get { return _<#=prop.Name#>; }
+        }
+        // --------------------------------------------------------------------
+        // END_COLLECTION_PROPERTY: <#=prop.Name#> (<#=prop.Type#>)
+        // --------------------------------------------------------------------
+
+<#
+    }
+    else
+    {
+#>
+        // --------------------------------------------------------------------
+        // BEGIN_PROPERTY: <#=prop.Name#> (<#=prop.Type#>)
+        // --------------------------------------------------------------------
+        <#=prop.Type#> _<#=prop.Name#> = <#=prop.DefaultValue#>;
+
+        void Raise_<#=prop.Name#> ()
+        {
+          OnPropertyChanged ("<#=prop.Name#>");
+<#
+  if (prop.LabelValue.Length > 0)
+  {
+#>
+          OnPropertyChanged ("<#=prop.Name#>Label");
+<#
+  }
+#>
+        }
+
+<#
+  if (prop.LabelValue.Length > 0)
+  {
+#>
+        public string <#=prop.Name#>Label => <#=prop.LabelValue#>;
+
+<#
+  }
+#>
+        public <#=prop.Type#> <#=prop.Name#>
+        {
+            get { return _<#=prop.Name#>; }
+            set
+            {
+                if (_<#=prop.Name#> == value)
+                {
+                    return;
+                }
+
+                var prev = _<#=prop.Name#>;
+
+                _<#=prop.Name#> = value;
+
+                Changed_<#=prop.Name#> (prev, _<#=prop.Name#>);
+
+                Raise_<#=prop.Name#> ();
+            }
+        }
+        // --------------------------------------------------------------------
+        partial void Changed_<#=prop.Name#> (<#=prop.Type#> prev, <#=prop.Type#> current);
+        // --------------------------------------------------------------------
+        // END_PROPERTY: <#=prop.Name#> (<#=prop.Type#>)
+        // --------------------------------------------------------------------
+
+<#
+    }
+  }
+#>
+
+<#
+  foreach (var cmd in commands)
+  {
+#>
+        // --------------------------------------------------------------------
+        // BEGIN_COMMAND: <#=cmd.Name#>
+        // --------------------------------------------------------------------
+        readonly UserCommand _<#=cmd.Name#>;
+
+        bool CanExecute<#=cmd.Name#> ()
+        {
+          bool result = false;
+          CanExecute_<#=cmd.Name#> (ref result);
+
+          return result;
+        }
+
+        void Execute<#=cmd.Name#> ()
+        {
+          Execute_<#=cmd.Name#> ();
+        }
+
+        public ICommand <#=cmd.Name#> { get { return _<#=cmd.Name#>;} }
+        // --------------------------------------------------------------------
+        partial void CanExecute_<#=cmd.Name#> (ref bool result);
+        partial void Execute_<#=cmd.Name#> ();
+        // --------------------------------------------------------------------
+        // END_COMMAND: <#=cmd.Name#>
+        // --------------------------------------------------------------------
+
+<#
+  }
+#>
+
+        partial void Constructed ();
+
+        public MainWindowViewModel (Dispatcher dispatcher)
+        {
+          _dispatcher = dispatcher;
+<#
+  foreach (var cmd in commands)
+  {
+#>
+          _<#=cmd.Name#> = new UserCommand (CanExecute<#=cmd.Name#>, Execute<#=cmd.Name#>);
+<#
+  }
+#>
+
+          Constructed ();
+        }
+
+        void ResetCanExecute ()
+        {
+<#
+  foreach (var cmd in commands)
+  {
+#>
+          _<#=cmd.Name#>.RefreshCanExecute ();
+<#
+  }
+#>
+        }
+
+        void Dispatch(Action action)
+        {
+          _dispatcher.BeginInvoke(action);
+        }
+
+        protected virtual void OnPropertyChanged (string propertyChanged)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyChanged));
+        }
+    }
+}
+
+<#+
+  class PropertyInfo
+  {
+    public readonly string Type         ;
+    public readonly string Name         ;
+    public readonly string DefaultValue ;
+    public readonly string LabelValue   ;
+    public readonly bool   IsCollection ;
+
+    public PropertyInfo (string type, string name, string defaultValue, string labelValue, bool isCollection)
+    {
+      Type          = type          ?? "<NoType>";
+      Name          = name          ?? "<NoName>";
+      DefaultValue  = defaultValue  ?? $"default";
+      LabelValue    = labelValue    ?? ""        ;
+      IsCollection  = isCollection               ;
+    }
+  }
+
+  static PropertyInfo P (string type, string name, string defaultValue = null) =>
+    new PropertyInfo (type, name, defaultValue, null, false);
+
+  static PropertyInfo C (string type, string name) =>
+    new PropertyInfo (type, name, null, null, true);
+
+  static PropertyInfo LP (string type, string name, string labelValue, string defaultValue = null) =>
+    new PropertyInfo (type, name, defaultValue, labelValue, false);
+
+  static PropertyInfo LC (string type, string name, string labelValue) =>
+    new PropertyInfo (type, name, null, labelValue, true);
+
+  class CommandInfo
+  {
+    public readonly string Name         ;
+
+    public CommandInfo (string name)
+    {
+      Name          = name          ?? "<NoName>";
+    }
+  }
+
+  static CommandInfo C (string name) =>
+    new CommandInfo (name);
+
+#>

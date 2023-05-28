@@ -10,12 +10,10 @@ namespace WPFExample
 {
     public class WPFExamplePlugin : AudioPluginWPF
     {
-        AudioIOPort monoInput;
         AudioIOPort stereoOutput;
 
         AudioPluginParameter gainParameter = null;
         AudioPluginParameter panParameter = null;
-        AudioPluginParameter pitchParameter = null;
 
         public WPFExamplePlugin()
         {
@@ -57,16 +55,6 @@ namespace WPFExample
                 Type = EAudioPluginParameterType.Float,
                 MinValue = -1,
                 MaxValue = 1,
-                DefaultValue = 0,
-                ValueFormat = "{0:0.0}"
-            });
-            AddParameter(pitchParameter = new AudioPluginParameter
-            {
-                ID = "pitch",
-                Name = "Pitch",
-                Type = EAudioPluginParameterType.Float,
-                MinValue = -100,
-                MaxValue = 100,
                 DefaultValue = 0,
                 ValueFormat = "{0:0.0}"
             });

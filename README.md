@@ -1,42 +1,33 @@
-# AudioPlugSharp
-Easily create VST3 audio plugins in C#
+# VSTi синтезатор
 
-AudioPlugSharp provides a C++/CLI bridge to load managed audio plugins into VST hosts. User interfaces can be created with built-in support for WPF. Windows Forms interfaces are also possible.
+Для создания используется
 
-Framework support is .NET Core only. By default, it is configured to use .NET 6.0.
+1) #NAudio
+2) #AudioPlugSharp
+3) #VST .NET
 
-See the [SimpleExample](https://github.com/mikeoliphant/AudioPlugSharp/blob/master/SimpleExample/SimpleExamplePlugin.cs) and [WPFExample](https://github.com/mikeoliphant/AudioPlugSharp/blob/master/WPFExample/WPFExamplePlugin.cs) projects for example usage.
+#Чтобы запустить:
 
-# Current Release
+1) Перейти в папку vstbuild и открыть vstsdk.sln
+2) Выбрать конфигурацию решения Release x64 (По умолчанию будет Debug Any CPU)
+3) ПКМ на ALL_BUILD и нажать "Пересобрать"
+4) Как закончится перейти в начальную папку и открыть AudioPlugSharp.sln
+5) Снова пункт 2
+6) Пересобрать все проекты из папки vstsdk (#ПО ОТДЕЛЬНОСТИ!!!)
+7) Пересобрать AudioPlugSharpVst
+8) Пересобрать WPFExample в папке ExamplePlugins
+9) Чтобы затестить изменения нужно пересобрать WPFExample
 
-The current [binary release is here](https://github.com/mikeoliphant/AudioPlugSharp/releases/latest). If you just want to build a plugin, you can download this rather than building from source.
+#Чтобы открыть в фл
 
-# Plugin Project Setup and Deployment
+1) Открыть корневую папку проекта (в проводнике)
+2) Скопировать содерживмое папки: "WPFExample -> bin -> Release -> net6.0-windows"
+3) Вставить в папку где хранятся VST3 для (по умолчанию "C:\Program Files (x86)\Common Files\VST3")
+4) Открыть фл
+5) Options -> File settings -> Manage plugins -> Find installed plugins
+6) Слева в проводнике фл перейти в Plugin database -> Installed -> Generators
+7) Новый плагин будет подсвечен оранжевым
 
-Your plugin project will need an assembly dependency on **AudioPlugSharp.dll** (and **AudioPlugSharpWPF.dll** if you are using it).
 
-For deployment, you need to copy **"AudioPlugSharpVst.vst3"** to your output folder, and rename it to be **"YourPluginDllNameBridge.vst3"**. So if your plugin dll is called **"MyPlugin.dll"**, then you would rename **"AudioPlugSharpVst.vst3"** to **"MyPluginBridge.vst3"**. You also need to copy **"AudioPlugSharpVst.runtimeconfig.json"** (or **"wpf.runtimeconfig.json"** if you are using WPF in your plugin) to your output folder as **"YourPluginDllNameBridge.runtimeconfig.json"**. You also need to copy **"Ijwhost.dll"** to your output folder.
-  
-These steps can be done using a Post-build event. Have a look at the included sample plugins for examples - keep in mind you may need to change the source folder of the "copy" commands depending on where your copy of AudioPlugSharp is.
 
-# Examples
 
-For an example of how to create your own plugin in its own solution, have a look at the LiveSpice VST plugin here:
-
-https://github.com/dsharlet/LiveSPICE/tree/master/LiveSPICEVst
-
-# AudioPlugSharp Building Instructions
-
-You will need to have CMake (https://cmake.org) installed.
-
-From a shell, run the following:
-
-```bash
-git clone --recursive https://github.com/mikeoliphant/AudioPlugSharp
-cd AudioPlugSharp
-mkdir vstbuild
-cd vstbuild
-cmake.exe -G "Visual Studio 17 2022" -A x64 ../vst3sdk
-```
-
-Then you can load the solution in Visual Studio and build. **Note that you will need to change the last line above if you have a different version of Visual Studio.**
