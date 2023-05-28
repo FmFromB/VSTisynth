@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\DialBackground.png" />
+    <None Remove="Images\DialBackgroundWhite.png" />
+    <None Remove="Images\DialPointer.png" />
+    <None Remove="Images\DialPointerBlack.png" />
+    <None Remove="Images\PowerOff.png" />
+    <None Remove="Images\PowerOn.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\DialBackground.png" />
+    <Resource Include="Images\DialBackgroundWhite.png" />
+    <Resource Include="Images\DialPointerBlack.png" />
+    <Resource Include="Images\DialPointer.png" />
+    <Resource Include="Images\PowerOff.png" />
+    <Resource Include="Images\PowerOn.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AudioPlugSharp\AudioPlugSharp.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="EditorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+
+</Project>

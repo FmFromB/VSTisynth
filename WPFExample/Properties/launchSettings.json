@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "WPFExample": {
+      "commandName": "Executable",
+      "executablePath": "D:\\Programs\\FL Studio 21\\FL64.exe",
+      "nativeDebugging": true
+    }
+  }
+}
