@@ -8,6 +8,12 @@
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="MainWindow - Копировать.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Remove="MainWindow - Копировать.xaml" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Generated_ViewModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

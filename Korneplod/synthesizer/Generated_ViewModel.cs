@@ -6,6 +6,8 @@ using System.Windows.Threading;
 
 
 
+
+
 namespace synthesizer
 {
     public partial class MainWindowViewModel : INotifyPropertyChanged
@@ -13,6 +15,7 @@ namespace synthesizer
         readonly Dispatcher _dispatcher;
 
         public event PropertyChangedEventHandler PropertyChanged;
+
 
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: Volume (double)
@@ -22,10 +25,14 @@ namespace synthesizer
         void Raise_Volume ()
         {
           OnPropertyChanged ("Volume");
+
           OnPropertyChanged ("VolumeLabel");
+
         }
 
+
         public string VolumeLabel => $"{(int)(Volume * 100.0)}%";
+
 
         public double Volume
         {
@@ -52,6 +59,7 @@ namespace synthesizer
         // END_PROPERTY: Volume (double)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: FrequencyAmplitudes (float[])
         // --------------------------------------------------------------------
@@ -60,7 +68,9 @@ namespace synthesizer
         void Raise_FrequencyAmplitudes ()
         {
           OnPropertyChanged ("FrequencyAmplitudes");
+
         }
+
 
         public float[] FrequencyAmplitudes
         {
@@ -87,6 +97,7 @@ namespace synthesizer
         // END_PROPERTY: FrequencyAmplitudes (float[])
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: Waveform (float[])
         // --------------------------------------------------------------------
@@ -95,7 +106,9 @@ namespace synthesizer
         void Raise_Waveform ()
         {
           OnPropertyChanged ("Waveform");
+
         }
+
 
         public float[] Waveform
         {
@@ -122,6 +135,7 @@ namespace synthesizer
         // END_PROPERTY: Waveform (float[])
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: Attack (float)
         // --------------------------------------------------------------------
@@ -130,10 +144,14 @@ namespace synthesizer
         void Raise_Attack ()
         {
           OnPropertyChanged ("Attack");
+
           OnPropertyChanged ("AttackLabel");
+
         }
 
+
         public string AttackLabel => $"{(int)(Attack * 1000.0)} ms";
+
 
         public float Attack
         {
@@ -160,6 +178,7 @@ namespace synthesizer
         // END_PROPERTY: Attack (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: Decay (float)
         // --------------------------------------------------------------------
@@ -168,10 +187,14 @@ namespace synthesizer
         void Raise_Decay ()
         {
           OnPropertyChanged ("Decay");
+
           OnPropertyChanged ("DecayLabel");
+
         }
 
+
         public string DecayLabel => $"{(int)(Decay * 1000.0)} ms";
+
 
         public float Decay
         {
@@ -198,6 +221,7 @@ namespace synthesizer
         // END_PROPERTY: Decay (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: Sustain (float)
         // --------------------------------------------------------------------
@@ -206,10 +230,14 @@ namespace synthesizer
         void Raise_Sustain ()
         {
           OnPropertyChanged ("Sustain");
+
           OnPropertyChanged ("SustainLabel");
+
         }
 
+
         public string SustainLabel => $"{(int)(Sustain * 100.0)}%";
+
 
         public float Sustain
         {
@@ -236,6 +264,7 @@ namespace synthesizer
         // END_PROPERTY: Sustain (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: Release (float)
         // --------------------------------------------------------------------
@@ -244,10 +273,14 @@ namespace synthesizer
         void Raise_Release ()
         {
           OnPropertyChanged ("Release");
+
           OnPropertyChanged ("ReleaseLabel");
+
         }
 
+
         public string ReleaseLabel => $"{(int)(Release * 1000.0)} ms";
+
 
         public float Release
         {
@@ -274,6 +307,7 @@ namespace synthesizer
         // END_PROPERTY: Release (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: Attack2 (float)
         // --------------------------------------------------------------------
@@ -282,10 +316,14 @@ namespace synthesizer
         void Raise_Attack2 ()
         {
           OnPropertyChanged ("Attack2");
+
           OnPropertyChanged ("Attack2Label");
+
         }
 
+
         public string Attack2Label => $"{(int)(Attack2 * 1000.0)} ms";
+
 
         public float Attack2
         {
@@ -312,6 +350,7 @@ namespace synthesizer
         // END_PROPERTY: Attack2 (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: Decay2 (float)
         // --------------------------------------------------------------------
@@ -320,10 +359,14 @@ namespace synthesizer
         void Raise_Decay2 ()
         {
           OnPropertyChanged ("Decay2");
+
           OnPropertyChanged ("Decay2Label");
+
         }
 
+
         public string Decay2Label => $"{(int)(Decay2 * 1000.0)} ms";
+
 
         public float Decay2
         {
@@ -350,6 +393,7 @@ namespace synthesizer
         // END_PROPERTY: Decay2 (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: Sustain2 (float)
         // --------------------------------------------------------------------
@@ -358,10 +402,14 @@ namespace synthesizer
         void Raise_Sustain2 ()
         {
           OnPropertyChanged ("Sustain2");
+
           OnPropertyChanged ("Sustain2Label");
+
         }
 
+
         public string Sustain2Label => $"{(int)(Sustain2 * 100.0)}%";
+
 
         public float Sustain2
         {
@@ -388,6 +436,7 @@ namespace synthesizer
         // END_PROPERTY: Sustain2 (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: Release2 (float)
         // --------------------------------------------------------------------
@@ -396,10 +445,14 @@ namespace synthesizer
         void Raise_Release2 ()
         {
           OnPropertyChanged ("Release2");
+
           OnPropertyChanged ("Release2Label");
+
         }
 
+
         public string Release2Label => $"{(int)(Release2 * 1000.0)} ms";
+
 
         public float Release2
         {
@@ -426,6 +479,7 @@ namespace synthesizer
         // END_PROPERTY: Release2 (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: Attack3 (float)
         // --------------------------------------------------------------------
@@ -434,10 +488,14 @@ namespace synthesizer
         void Raise_Attack3 ()
         {
           OnPropertyChanged ("Attack3");
+
           OnPropertyChanged ("Attack3Label");
+
         }
 
+
         public string Attack3Label => $"{(int)(Attack3 * 1000.0)} ms";
+
 
         public float Attack3
         {
@@ -464,6 +522,7 @@ namespace synthesizer
         // END_PROPERTY: Attack3 (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: Decay3 (float)
         // --------------------------------------------------------------------
@@ -472,10 +531,14 @@ namespace synthesizer
         void Raise_Decay3 ()
         {
           OnPropertyChanged ("Decay3");
+
           OnPropertyChanged ("Decay3Label");
+
         }
 
+
         public string Decay3Label => $"{(int)(Decay3 * 1000.0)} ms";
+
 
         public float Decay3
         {
@@ -502,6 +565,7 @@ namespace synthesizer
         // END_PROPERTY: Decay3 (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: Sustain3 (float)
         // --------------------------------------------------------------------
@@ -510,10 +574,14 @@ namespace synthesizer
         void Raise_Sustain3 ()
         {
           OnPropertyChanged ("Sustain3");
+
           OnPropertyChanged ("Sustain3Label");
+
         }
 
+
         public string Sustain3Label => $"{(int)(Sustain3 * 100.0)}%";
+
 
         public float Sustain3
         {
@@ -540,6 +608,7 @@ namespace synthesizer
         // END_PROPERTY: Sustain3 (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: Release3 (float)
         // --------------------------------------------------------------------
@@ -548,10 +617,14 @@ namespace synthesizer
         void Raise_Release3 ()
         {
           OnPropertyChanged ("Release3");
+
           OnPropertyChanged ("Release3Label");
+
         }
 
+
         public string Release3Label => $"{(int)(Release3 * 1000.0)} ms";
+
 
         public float Release3
         {
@@ -578,6 +651,7 @@ namespace synthesizer
         // END_PROPERTY: Release3 (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: CutOff (int)
         // --------------------------------------------------------------------
@@ -586,10 +660,14 @@ namespace synthesizer
         void Raise_CutOff ()
         {
           OnPropertyChanged ("CutOff");
+
           OnPropertyChanged ("CutOffLabel");
+
         }
 
+
         public string CutOffLabel => $"{CutOff} Hz";
+
 
         public int CutOff
         {
@@ -616,6 +694,7 @@ namespace synthesizer
         // END_PROPERTY: CutOff (int)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: Q (float)
         // --------------------------------------------------------------------
@@ -624,10 +703,14 @@ namespace synthesizer
         void Raise_Q ()
         {
           OnPropertyChanged ("Q");
+
           OnPropertyChanged ("QLabel");
+
         }
 
+
         public string QLabel => $"{((int)(Q * 100.0f))/ 100.0f}";
+
 
         public float Q
         {
@@ -654,6 +737,7 @@ namespace synthesizer
         // END_PROPERTY: Q (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: TremoloFreq (int)
         // --------------------------------------------------------------------
@@ -662,10 +746,14 @@ namespace synthesizer
         void Raise_TremoloFreq ()
         {
           OnPropertyChanged ("TremoloFreq");
+
           OnPropertyChanged ("TremoloFreqLabel");
+
         }
 
+
         public string TremoloFreqLabel => $"{TremoloFreqMult * TremoloFreq} Hz";
+
 
         public int TremoloFreq
         {
@@ -692,6 +780,7 @@ namespace synthesizer
         // END_PROPERTY: TremoloFreq (int)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: TremoloGain (float)
         // --------------------------------------------------------------------
@@ -700,10 +789,14 @@ namespace synthesizer
         void Raise_TremoloGain ()
         {
           OnPropertyChanged ("TremoloGain");
+
           OnPropertyChanged ("TremoloGainLabel");
+
         }
 
+
         public string TremoloGainLabel => $"{Math.Max(0, TremoloGain) * 100.0f}%";
+
 
         public float TremoloGain
         {
@@ -730,6 +823,7 @@ namespace synthesizer
         // END_PROPERTY: TremoloGain (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: TremoloFreqMult (int)
         // --------------------------------------------------------------------
@@ -738,10 +832,14 @@ namespace synthesizer
         void Raise_TremoloFreqMult ()
         {
           OnPropertyChanged ("TremoloFreqMult");
+
           OnPropertyChanged ("TremoloFreqMultLabel");
+
         }
 
+
         public string TremoloFreqMultLabel => $"{TremoloFreqMult}";
+
 
         public int TremoloFreqMult
         {
@@ -768,6 +866,7 @@ namespace synthesizer
         // END_PROPERTY: TremoloFreqMult (int)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: ChorusWidth (float)
         // --------------------------------------------------------------------
@@ -776,10 +875,14 @@ namespace synthesizer
         void Raise_ChorusWidth ()
         {
           OnPropertyChanged ("ChorusWidth");
+
           OnPropertyChanged ("ChorusWidthLabel");
+
         }
 
+
         public string ChorusWidthLabel => $"{((int)(ChorusWidth * 100.0f))/100.0f}";
+
 
         public float ChorusWidth
         {
@@ -806,6 +909,7 @@ namespace synthesizer
         // END_PROPERTY: ChorusWidth (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: ChorusSweep (float)
         // --------------------------------------------------------------------
@@ -814,10 +918,14 @@ namespace synthesizer
         void Raise_ChorusSweep ()
         {
           OnPropertyChanged ("ChorusSweep");
+
           OnPropertyChanged ("ChorusSweepLabel");
+
         }
 
+
         public string ChorusSweepLabel => $"{((int)(ChorusSweep * 100.0f))/100.0f}";
+
 
         public float ChorusSweep
         {
@@ -844,6 +952,7 @@ namespace synthesizer
         // END_PROPERTY: ChorusSweep (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: ChorusDelay (float)
         // --------------------------------------------------------------------
@@ -852,10 +961,14 @@ namespace synthesizer
         void Raise_ChorusDelay ()
         {
           OnPropertyChanged ("ChorusDelay");
+
           OnPropertyChanged ("ChorusDelayLabel");
+
         }
 
+
         public string ChorusDelayLabel => $"{((int)(ChorusDelay * 100.0f))/100.0f}";
+
 
         public float ChorusDelay
         {
@@ -882,6 +995,7 @@ namespace synthesizer
         // END_PROPERTY: ChorusDelay (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: PhaserDry (float)
         // --------------------------------------------------------------------
@@ -890,10 +1004,14 @@ namespace synthesizer
         void Raise_PhaserDry ()
         {
           OnPropertyChanged ("PhaserDry");
+
           OnPropertyChanged ("PhaserDryLabel");
+
         }
 
+
         public string PhaserDryLabel => $"{PhaserDry}";
+
 
         public float PhaserDry
         {
@@ -920,6 +1038,7 @@ namespace synthesizer
         // END_PROPERTY: PhaserDry (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: PhaserWet (float)
         // --------------------------------------------------------------------
@@ -928,10 +1047,14 @@ namespace synthesizer
         void Raise_PhaserWet ()
         {
           OnPropertyChanged ("PhaserWet");
+
           OnPropertyChanged ("PhaserWetLabel");
+
         }
 
+
         public string PhaserWetLabel => $"{PhaserWet}";
+
 
         public float PhaserWet
         {
@@ -958,6 +1081,7 @@ namespace synthesizer
         // END_PROPERTY: PhaserWet (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: PhaserFeedback (float)
         // --------------------------------------------------------------------
@@ -966,10 +1090,14 @@ namespace synthesizer
         void Raise_PhaserFeedback ()
         {
           OnPropertyChanged ("PhaserFeedback");
+
           OnPropertyChanged ("PhaserFeedbackLabel");
+
         }
 
+
         public string PhaserFeedbackLabel => $"{PhaserFeedback}";
+
 
         public float PhaserFeedback
         {
@@ -996,6 +1124,7 @@ namespace synthesizer
         // END_PROPERTY: PhaserFeedback (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: PhaserFreq (float)
         // --------------------------------------------------------------------
@@ -1004,10 +1133,14 @@ namespace synthesizer
         void Raise_PhaserFreq ()
         {
           OnPropertyChanged ("PhaserFreq");
+
           OnPropertyChanged ("PhaserFreqLabel");
+
         }
 
+
         public string PhaserFreqLabel => $"{PhaserFreq}";
+
 
         public float PhaserFreq
         {
@@ -1034,6 +1167,7 @@ namespace synthesizer
         // END_PROPERTY: PhaserFreq (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: PhaserWidth (float)
         // --------------------------------------------------------------------
@@ -1042,10 +1176,14 @@ namespace synthesizer
         void Raise_PhaserWidth ()
         {
           OnPropertyChanged ("PhaserWidth");
+
           OnPropertyChanged ("PhaserWidthLabel");
+
         }
 
+
         public string PhaserWidthLabel => $"{PhaserWidth}";
+
 
         public float PhaserWidth
         {
@@ -1072,6 +1210,7 @@ namespace synthesizer
         // END_PROPERTY: PhaserWidth (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: PhaserSweep (float)
         // --------------------------------------------------------------------
@@ -1080,10 +1219,14 @@ namespace synthesizer
         void Raise_PhaserSweep ()
         {
           OnPropertyChanged ("PhaserSweep");
+
           OnPropertyChanged ("PhaserSweepLabel");
+
         }
 
+
         public string PhaserSweepLabel => $"{PhaserSweep}";
+
 
         public float PhaserSweep
         {
@@ -1110,6 +1253,7 @@ namespace synthesizer
         // END_PROPERTY: PhaserSweep (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: Level1 (float)
         // --------------------------------------------------------------------
@@ -1118,10 +1262,14 @@ namespace synthesizer
         void Raise_Level1 ()
         {
           OnPropertyChanged ("Level1");
+
           OnPropertyChanged ("Level1Label");
+
         }
 
+
         public string Level1Label => $"{(int)(Level1 * 100.0)}%";
+
 
         public float Level1
         {
@@ -1148,6 +1296,7 @@ namespace synthesizer
         // END_PROPERTY: Level1 (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: Level2 (float)
         // --------------------------------------------------------------------
@@ -1156,10 +1305,14 @@ namespace synthesizer
         void Raise_Level2 ()
         {
           OnPropertyChanged ("Level2");
+
           OnPropertyChanged ("Level2Label");
+
         }
 
+
         public string Level2Label => $"{(int)(Level2 * 100.0)}%";
+
 
         public float Level2
         {
@@ -1186,6 +1339,7 @@ namespace synthesizer
         // END_PROPERTY: Level2 (float)
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_PROPERTY: Level3 (float)
         // --------------------------------------------------------------------
@@ -1194,10 +1348,14 @@ namespace synthesizer
         void Raise_Level3 ()
         {
           OnPropertyChanged ("Level3");
+
           OnPropertyChanged ("Level3Label");
+
         }
 
+
         public string Level3Label => $"{(int)(Level3 * 100.0)}%";
+
 
         public float Level3
         {
@@ -1223,6 +1381,8 @@ namespace synthesizer
         // --------------------------------------------------------------------
         // END_PROPERTY: Level3 (float)
         // --------------------------------------------------------------------
+
+
 
 
         // --------------------------------------------------------------------
@@ -1251,6 +1411,7 @@ namespace synthesizer
         // END_COMMAND: OnCommand
         // --------------------------------------------------------------------
 
+
         // --------------------------------------------------------------------
         // BEGIN_COMMAND: OffCommand
         // --------------------------------------------------------------------
@@ -1278,21 +1439,28 @@ namespace synthesizer
         // --------------------------------------------------------------------
 
 
+
         partial void Constructed ();
 
         public MainWindowViewModel (Dispatcher dispatcher)
         {
           _dispatcher = dispatcher;
+
           _OnCommand = new UserCommand (CanExecuteOnCommand, ExecuteOnCommand);
+
           _OffCommand = new UserCommand (CanExecuteOffCommand, ExecuteOffCommand);
+
 
           Constructed ();
         }
 
         void ResetCanExecute ()
         {
+
           _OnCommand.RefreshCanExecute ();
+
           _OffCommand.RefreshCanExecute ();
+
         }
 
         void Dispatch(Action action)

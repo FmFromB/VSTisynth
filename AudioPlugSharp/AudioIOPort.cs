@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
+
 namespace AudioPlugSharp
 {
     public enum EAudioChannelConfiguration

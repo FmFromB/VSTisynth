@@ -180,5 +180,10 @@ namespace synthesizer
             }
             return samples;        
         }
+
+        public static implicit operator double(SynthWaveProvider v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

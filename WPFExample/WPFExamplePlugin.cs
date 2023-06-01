@@ -2,9 +2,6 @@
 using System.Windows.Controls;
 using AudioPlugSharp;
 using AudioPlugSharpWPF;
-using NAudio.Wave;
-using NAudio.Wave.SampleProviders;
-
 
 namespace WPFExample
 {

@@ -1,0 +1,6 @@
+# CMake generation dependency list for this directory.
+D:/Programs/Cmake/share/cmake-3.26/Modules/FindEXPAT.cmake
+D:/Programs/Cmake/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake
+D:/Programs/Cmake/share/cmake-3.26/Modules/FindPackageMessage.cmake
+D:/Programs/Cmake/share/cmake-3.26/Modules/FindPkgConfig.cmake
+D:/repo/VST/AudioPlugSharp-0.4/vst3sdk/vstgui4/vstgui/uidescription/CMakeLists.txt

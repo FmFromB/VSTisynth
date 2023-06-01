@@ -1,0 +1,4 @@
+# CMake generation dependency list for this directory.
+D:/repo/VST/AudioPlugSharp-0.4/vst3sdk/cmake/modules/SMTG_AddVST3AuV3.cmake
+D:/repo/VST/AudioPlugSharp-0.4/vst3sdk/cmake/modules/SMTG_CodeSign.cmake
+D:/repo/VST/AudioPlugSharp-0.4/vst3sdk/public.sdk/samples/vst/again_auv3/CMakeLists.txt

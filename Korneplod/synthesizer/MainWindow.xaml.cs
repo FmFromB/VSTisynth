@@ -1,7 +1,9 @@
-﻿using NAudio.Wave.SampleProviders;
+﻿using AudioPlugSharp;
+using NAudio.Wave.SampleProviders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,14 +12,14 @@ using System.Windows.Media;
 
 namespace synthesizer
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         private readonly MainWindowViewModel _viewModel;
         private static List<Slider> Sliders = new List<Slider> { };
         private List<CheckBox> Checks = new List<CheckBox> { };
         private List<RadioButton> RBs = new List<RadioButton> { };
         private ControlsEnumerator controlFinder;
-
+        AudioIOPort stereoOutput;
 
         public MainWindow()
         {
@@ -38,6 +40,7 @@ namespace synthesizer
 
             _viewModel = new MainWindowViewModel(Dispatcher);
             DataContext = _viewModel;
+
             Closing += ((obj, e) => _viewModel.OffCommand.Execute(null));
         }
 
@@ -304,6 +307,6 @@ namespace synthesizer
             {
                 _viewModel.Voice3Semi = selected;
             }
-        }
+        }     
     }
 }

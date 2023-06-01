@@ -1,0 +1,1348 @@
+﻿<Window x:Name="Essence" x:Class="synthesizer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:synthesizer"
+        mc:Ignorable="d"
+        Title="Korneplod"
+        Height="633"
+        Width="1226"
+        Icon="Visuals/MainIcon.ico" MinWidth="68" MinHeight="68" WindowStyle="SingleBorderWindow"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="Background" Value="{StaticResource WordBlueBrush}"/>
+        </Style>
+        <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border Height="10" >
+                            <Border BorderThickness="1" Height="5" Margin="-2,0,0,0" BorderBrush="#FF9A9A9A">
+                                <Border.Background>
+                                    <SolidColorBrush Color="Gray"/>
+                                </Border.Background>
+                            </Border>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderRepeatButton1" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border SnapsToDevicePixels="True" Background="Goldenrod"  BorderThickness="1,1,1,1" Height="5" Margin="0,0,-1,0" BorderBrush="#FF9A9A9A"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderThumb" TargetType="Thumb">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Border x:Name="Slider_Border" Height="27" Width="17" Background="#FF9A9A9A">
+                            <Border.OpacityMask>
+                                <ImageBrush ImageSource="/Visuals/metal.png"/>
+                            </Border.OpacityMask>
+                            <Border x:Name="Slider_Rectangle" Height="25" Width="15">
+
+                                <Border.Background>
+                                    <ImageBrush ImageSource="/Visuals/rubber.png"/>
+                                </Border.Background>
+
+                                <Border.OpacityMask>
+                                    <ImageBrush ImageSource="/Visuals/metal.png"/>
+                                </Border.OpacityMask>
+
+                            </Border>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="Slider"  TargetType="Slider">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Track Grid.Row="1" x:Name="PART_Track"   >
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton1}"  Command="Slider.DecreaseLarge" />
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource SliderThumb}"  />
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton}" Command="Slider.IncreaseLarge" />
+                    </Track.IncreaseRepeatButton>
+                </Track>
+            </Grid>
+        </ControlTemplate>
+
+        <Style x:Key="Horizontal_Slider" TargetType="Slider">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Horizontal">
+                    <Setter Property="MinHeight" Value="21" />
+                    <Setter Property="MinWidth" Value="104" />
+                    <Setter Property="Template" Value="{StaticResource Slider}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+
+    <TabControl x:Name="tabControl" BorderThickness="10,0,10,0" Margin="20,0,22,41" ClipToBounds="True" BorderBrush="{x:Null}" MinWidth="1184" MaxWidth="1184" MinHeight="577.37" MaxHeight="577.37">
+        <TabItem x:Name="MainTab" Header="Main" 
+                         Visibility="Visible" Width="314" Padding="260,-3,0,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="18" Margin="0,-2,0,0" ClipToBounds="True" Foreground="#FFC88A59">
+
+            <Grid x:Name="MainGrid" RenderTransformOrigin="0.476,0.453" Width="1160" ClipToBounds="True" Height="564" MinHeight="564" MaxHeight="564" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" MinWidth="1160" MaxWidth="1160">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1936" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="458.666"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Margin="0,60,1696,359" Grid.Row="1" Height="40">
+                    <Label x:Name="Attack"
+               Width="60"
+           Margin="0,0,0,0"
+           HorizontalAlignment="Left"
+           Content="ATTACK" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                    </Label>
+                    <Label x:Name="AttackVol"
+               Width="60"
+           Margin="-60,0,0,0"
+               FontWeight="Bold"
+           Content="{Binding AttackLabel}" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" HorizontalAlignment="Left">
+                    </Label>
+                    <Label x:Name="Decay"
+               Width="60"
+           Margin="0,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="DECAY" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                    </Label>
+                    <Label x:Name="DecayVol"
+               Width="60"
+           Margin="-60,0,0,0"
+               FontWeight="Bold"
+           Content="{Binding DecayLabel}" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" HorizontalAlignment="Left">
+                    </Label>
+                    <Label x:Name="Sustain"
+               Width="60"
+           Margin="0,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="SUSTAIN" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                    </Label>
+                    <Label x:Name="SustainVol"
+               Width="60"
+           Margin="-60,0,0,0"
+               FontWeight="Bold"
+           Content="{Binding SustainLabel}" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16">
+                    </Label>
+                    <Label x:Name="Release"
+               Width="60"
+           Margin="0,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="RELEASE" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                    </Label>
+                    <Label x:Name="ReleaseVol"
+               Width="60"
+           Margin="-60,0,0,0"
+               FontWeight="Bold"
+           Content="{Binding ReleaseLabel}" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16">
+                    </Label>
+                </StackPanel>
+                <Border Margin="0,60,0,0" Width="240" Height="190" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" BorderThickness="1,1,1,1" Panel.ZIndex="-1">
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Width="298" Margin="0,39,0,0" Height="150">
+                        <Slider x:Name="attack1" Style="{StaticResource Horizontal_Slider}"
+                Orientation="Horizontal"
+                Minimum="0.0"
+                Maximum="5.0"
+                Value="{Binding Attack}" Width="150" Height="30" Margin="15,-2,0,0" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" >
+                            <Slider.LayoutTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="270"/>
+                                </TransformGroup>
+                            </Slider.LayoutTransform>
+                        </Slider>
+                        <Slider x:Name="decay1" Margin="30,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                Orientation="Horizontal"
+                Minimum="0.0"
+                Maximum="2.0"
+                Value="{Binding Decay}" RenderTransformOrigin="3.481,0.512" Width="150" VerticalAlignment="Stretch" Height="30">
+                            <Slider.LayoutTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="270"/>
+                                </TransformGroup>
+                            </Slider.LayoutTransform>
+                        </Slider>
+
+                        <Slider x:Name="sustain1" Margin="30,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                Orientation="Horizontal"
+                Minimum="0.0"
+                Maximum="1.0"
+                Value="{Binding Sustain}" HorizontalAlignment="Left" Width="150" Height="30">
+                            <Slider.LayoutTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="270"/>
+                                </TransformGroup>
+                            </Slider.LayoutTransform>
+                        </Slider>
+
+                        <Slider x:Name="release1" Margin="30,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                Orientation="Horizontal"
+                Minimum="0.03"
+                Maximum="5.0"
+                Value="{Binding Release}" Width="150" VerticalAlignment="Stretch" HorizontalAlignment="Left" Height="30">
+                            <Slider.LayoutTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="270"/>
+                                </TransformGroup>
+                            </Slider.LayoutTransform>
+                        </Slider>
+                    </StackPanel>
+                </Border>
+                <StackPanel Orientation="Horizontal" Margin="245,60,1511,359" Grid.Row="1" Height="40">
+                    <Label x:Name="CutOFF"
+               Width="60"
+           Margin="0,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="CUTOFF" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                    </Label>
+                    <Label
+                            
+               Width="60"
+               FontWeight="Bold" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Bottom">
+                        <CheckBox x:Name="LowPassFilter"
+                      Checked="LowPassFilter_checked"
+                      Unchecked="LowPassFilter_unchecked"
+                      Content="" Width="16" Height="15" FontSize="12" Background="#FFC88A59">
+                        </CheckBox>
+                    </Label>
+                    <Label x:Name="Cutoff" Content="{Binding CutOffLabel}"
+               Width="60"
+           Margin="-120,0,0,0"
+               FontWeight="Bold" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalAlignment="Left">
+                    </Label>
+                    <Label x:Name="Q"
+               Width="60"
+           Margin="0,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="Q" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                    </Label>
+                    <Label x:Name="q" Content="{Binding QLabel}"
+                            
+               Width="60"
+           Margin="-60,0,0,0"
+               FontWeight="Bold" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14">
+                    </Label>
+                    <Label x:Name="ActivateCutOff"
+               Width="60"
+           Margin="-120,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="ACTIVATE" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="10">
+                    </Label>
+                </StackPanel>
+                <Border Margin="245,60,0,0" Width="180" Height="190" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" BorderThickness="1,1,1,1" Panel.ZIndex="-1">
+                    <StackPanel Orientation="Horizontal" Margin="0,39,0,-1" Grid.Row="1">
+                        <Slider x:Name="cutoff1"  Margin="15,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                                        Orientation="Horizontal"
+                                        Minimum="100"
+                                        Maximum="20000"
+                                        TickFrequency="100"
+                                        Value="{Binding CutOff}" Width="150" VerticalAlignment="Stretch" HorizontalAlignment="Left" Height="30">
+                            <Slider.LayoutTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="270"/>
+                                </TransformGroup>
+                            </Slider.LayoutTransform>
+                        </Slider>
+                        <CheckBox x:Name="SubOscillator"
+                      Checked="SubOscillator_checked"
+                      Unchecked="SubOscillator_unchecked"
+                      Content="Sub" Width="70" Height="25" FontFamily="Arial Black" FontSize="12" Background="#FFC88A59" BorderBrush="Black" Margin="10,0,0,0"/>
+
+                        <Slider x:Name="q1"  Margin="10,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                                        Orientation="Horizontal"
+                                        Minimum="0.03"
+                                        Maximum="1.0"
+                                        TickFrequency="0.1"
+                                        Value="{Binding Q}" Width="150" VerticalAlignment="Stretch" HorizontalAlignment="Left" Height="30">
+                            <Slider.LayoutTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="270"/>
+                                </TransformGroup>
+                            </Slider.LayoutTransform>
+                        </Slider>
+                        <CheckBox x:Name="Vibrato"
+                      Checked="Vibrato_checked"
+                      Unchecked="Vibrato_unchecked"
+                      VerticalAlignment="Top"
+                      Margin="-110,40,0,0" Content="Vibrato" Height="25" Width="74" FontFamily="Arial Black" FontSize="12" Background="#FFC88A59" BorderBrush="Black" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </Border>
+
+                <StackPanel Orientation="Horizontal" Margin="615,100,1142,209" Grid.Row="1" Height="150">
+
+                    <Slider x:Name="width1"  Margin="15,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                                    Orientation="Horizontal"
+                                    Minimum="0.0"
+                                    Maximum="1"
+                                    TickFrequency="0.1"
+                                    Value="{Binding ChorusWidth}" Width="150" VerticalAlignment="Stretch" HorizontalAlignment="Left" Height="30">
+                        <Slider.LayoutTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="270"/>
+                            </TransformGroup>
+                        </Slider.LayoutTransform>
+                    </Slider>
+                    <Slider x:Name="sweep1"  Margin="30,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                                    Orientation="Horizontal"
+                                    Minimum="0.0"
+                                    Maximum="1"
+                                    TickFrequency="0.1"
+                                    Value="{Binding ChorusSweep}" Width="150" VerticalAlignment="Stretch" HorizontalAlignment="Left" Height="30">
+                        <Slider.LayoutTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="270"/>
+                            </TransformGroup>
+                        </Slider.LayoutTransform>
+                    </Slider>
+                    <Slider x:Name="delay1"  Margin="30,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                                    Orientation="Horizontal"
+                                    Minimum="0.0"
+                                    Maximum="1"
+                                    TickFrequency="0.1"
+                                    Value="{Binding ChorusDelay}" Width="150" VerticalAlignment="Stretch" HorizontalAlignment="Left" Height="30">
+                        <Slider.LayoutTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="270"/>
+                            </TransformGroup>
+                        </Slider.LayoutTransform>
+                    </Slider>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="800,100,776,209" Grid.Row="1" Height="150">
+
+                    <Slider x:Name="dry1"  Margin="15,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                                    Orientation="Horizontal"
+                                    Minimum="0.0"
+                                    Maximum="1"
+                                    TickFrequency="0.1"
+                                    Value="{Binding PhaserDry}" Width="150" VerticalAlignment="Stretch" HorizontalAlignment="Left" Height="30">
+                        <Slider.LayoutTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="270"/>
+                            </TransformGroup>
+                        </Slider.LayoutTransform>
+                    </Slider>
+                    <Slider x:Name="wet1"  Margin="30,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                                    Orientation="Horizontal"
+                                    Minimum="0.0"
+                                    Maximum="1"
+                                    TickFrequency="0.1"
+                                    Value="{Binding PhaserWet}" Width="150" VerticalAlignment="Stretch" HorizontalAlignment="Left" Height="30">
+                        <Slider.LayoutTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="270"/>
+                            </TransformGroup>
+                        </Slider.LayoutTransform>
+                    </Slider>
+                    <Slider x:Name="feedback1"  Margin="30,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                                    Orientation="Horizontal"
+                                    Minimum="0.0"
+                                    Maximum="1"
+                                    TickFrequency="0.1"
+                                    Value="{Binding PhaserFeedback}" Width="150" VerticalAlignment="Stretch" HorizontalAlignment="Left" Height="30">
+                        <Slider.LayoutTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="270"/>
+                            </TransformGroup>
+                        </Slider.LayoutTransform>
+                    </Slider>
+                    <Slider x:Name="freq11" Style="{StaticResource Horizontal_Slider}"
+                                Orientation="Horizontal"
+                                Minimum="0.0"
+                                Maximum="150"
+                                TickFrequency="10"
+                                Value="{Binding PhaserFreq}" Width="150" Height="30" Margin="30,0,0,0">
+                        <Slider.LayoutTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="270"/>
+                            </TransformGroup>
+                        </Slider.LayoutTransform>
+                    </Slider>
+                    <Slider x:Name="width11" Style="{StaticResource Horizontal_Slider}"
+                                Orientation="Horizontal"
+                                Minimum="0.0"
+                                Maximum="1"
+                                TickFrequency="0.1"
+                                Value="{Binding PhaserWidth}" Width="150" Height="30" Margin="30,0,0,0">
+                        <Slider.LayoutTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="270"/>
+                            </TransformGroup>
+                        </Slider.LayoutTransform>
+                    </Slider>
+                    <Slider x:Name="sweep11" Style="{StaticResource Horizontal_Slider}"
+                                Orientation="Horizontal"
+                                Minimum="0.0"
+                                Maximum="1"
+                                TickFrequency="0.1"
+                                Value="{Binding PhaserSweep}" Width="150" Height="30" Margin="30,0,0,0">
+                        <Slider.LayoutTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="270"/>
+                            </TransformGroup>
+                        </Slider.LayoutTransform>
+                    </Slider>
+                </StackPanel>
+
+                <Grid x:Name="footer" Grid.Row="1" Margin="0,250,0,88" HorizontalAlignment="Left" MinWidth="1161" MinHeight="120" MaxWidth="1161" MaxHeight="120">
+                    <Grid.Background>
+                        <ImageBrush/>
+                    </Grid.Background>
+                    <Border Width="240" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1,1,1,1">
+                        <Label Content="Envelope ADSR"  HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,0,0" FontFamily="Arial Black" Foreground="#FFC88A59"/>
+                    </Border>
+                    <Border Width="180" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1,1,1,1" Margin="245,0,0,0">
+                        <Label Content="Lowpass Filter"  HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,0,0" FontFamily="Arial Black" Foreground="#FFC88A59"/>
+                    </Border>
+                    <Border Width="180" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1,1,1,1" Margin="430,0,0,0">
+                        <Label Content="Tremolo"  HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,0,0" FontFamily="Arial Black" Foreground="#FFC88A59"/>
+                    </Border>
+                    <Border Width="180" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1,1,1,1" Margin="615,0,0,0">
+                        <Label Content="Chorus"  HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,0,0" FontFamily="Arial Black" Foreground="#FFC88A59"/>
+                    </Border>
+                    <Border Width="361" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1,1,1,1" Margin="800,0,0,0">
+                        <Label Content="Phaser"  HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,0,0" FontFamily="Arial Black" Foreground="#FFC88A59"/>
+                    </Border>
+                    <Label x:Name="SlidersLabel" Content=""/>
+
+                </Grid>
+                <!--<Grid x:Name="header" Panel.ZIndex="-1" Height="200" Width="{Binding ActualWidth, ElementName=tabControl, Mode=OneWay}" HorizontalAlignment="Left">
+                    <local:WaveformVisualizer
+      Waveform="{Binding Waveform}" Width="{Binding ActualWidth, ElementName=tabControl, Mode=OneWay}" Margin="0,-19,0,0" UseLayoutRounding="False" Cursor="Cross" RenderTransformOrigin="0.5,0.5" Height="{Binding ActualHeight, ElementName=header, Mode=OneWay}" Opacity="1"
+      >
+                        <local:WaveformVisualizer.Effect>
+                            <DropShadowEffect/>
+                        </local:WaveformVisualizer.Effect>
+                        <local:WaveformVisualizer.Clip>
+                            <EllipseGeometry/>
+                        </local:WaveformVisualizer.Clip>
+                    </local:WaveformVisualizer>
+                </Grid>-->
+                <Grid x:Name="SectionGrid" Grid.Row="1" Panel.ZIndex="-1" Height="60" Width="1160" VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <Ellipse x:Name="Onlipse" Margin="5,0,0,0" StrokeThickness="1" IsEnabled="False" IsHitTestVisible="False" Visibility="Visible" Height="50" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Panel.ZIndex="1">
+                        <Ellipse.Fill>
+                            <SolidColorBrush Color="Green"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Ellipse x:Name="Dislipse" Margin="60,0,0,0" IsEnabled="False" IsHitTestVisible="False" Height="50" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Panel.ZIndex="1">
+                        <Ellipse.Fill>
+                            <SolidColorBrush Color="Red"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Slider x:Name="master_vol" Style = "{StaticResource Horizontal_Slider}"
+            Margin="246,0,0,0"
+            Orientation="Horizontal"
+            Minimum="0"
+            Maximum="1"
+            Value="{Binding Volume}" 
+            Grid.ColumnSpan="1"
+            VerticalAlignment="Center" HorizontalAlignment="Left" Width="178">
+                    </Slider>
+
+                    <Label Width="120" HorizontalAlignment="Left" Content="{Binding VolumeLabel}" Margin="119,30,0,0" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{Binding Background, ElementName=VOLUME_Label}" BorderThickness="5,0,0,5" FontSize="{Binding FontSize, ElementName=VOLUME_Label}" Padding="0,0,0,0" FontFamily="{Binding FontFamily, ElementName=VOLUME_Label}" VerticalAlignment="Top" Foreground="#FF6A360F"/>
+                    <Button x:Name="Off"
+              Margin="60,0,0,0"
+              Command="{Binding OffCommand}" BorderThickness="0,0,0,0" Padding="0,0,0,0" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="50" Panel.ZIndex="-1" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center"
+              >
+                    </Button>
+                    <Button x:Name="On"
+              Command="{Binding OnCommand}" Padding="0,0,0,0" BorderThickness="0,0,0,0" Margin="5,0,0,0" Panel.ZIndex="-1" Height="50" Foreground="{x:Null}" BorderBrush="{x:Null}" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center"
+              >
+                    </Button>
+                    <Border Width="240" HorizontalAlignment="Left" Height="60" BorderThickness="5,5,5,5" Panel.ZIndex="-2">
+                    </Border>
+                    <Label x:Name="VOLUME_Label"
+               Width="120"
+           Margin="119,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="MASTER" VerticalAlignment="Center" FontFamily="Arial Black" BorderThickness="5,5,0,5" Padding="0,0,0,0" Height="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Foreground="#FF6A360F" Panel.ZIndex="-1" FontSize="16">
+                    </Label>
+                    <Border Width="185" HorizontalAlignment="Left" Height="60" BorderThickness="7,5,0,5" Panel.ZIndex="-2" Margin="239,0,0,0">
+                    </Border>
+                    <Border Width="185" HorizontalAlignment="Left" Height="60" BorderThickness="7,5,0,5" Panel.ZIndex="-2" Margin="424,0,0,0">
+                    </Border>
+                    <Border Width="185" HorizontalAlignment="Left" Height="60" BorderThickness="7,5,0,5" Panel.ZIndex="-2" Margin="609,0,0,0">
+                        <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left" Width="185" Height="60" Margin="-7,0,0,0" >
+                            <Label Content="Waveform:"
+                   FontWeight="Bold" FontFamily="Arial Black" Padding="0,0,0,0" VerticalContentAlignment="Top" Width="72" Margin="7,0,0,36" FontSize="12" Height="14" BorderThickness="1,1,1,1">
+                            </Label>
+                            <RadioButton x:Name="Sine"
+                         Margin="10,6,0,0"
+                         GroupName="Waveform"
+                         IsChecked="true"
+                         Checked="SetWaveForm"
+                         VerticalAlignment="Top" Content="Sine" Width="43" Height="17" FontSize="10" Padding="0,0,0,0" FontFamily="Arial Black" BorderThickness="2,2,2,2.2" Background="{x:Null}">
+                            </RadioButton>
+                            <RadioButton x:Name="Square"
+                         Margin="-191,0,0,21"
+                         GroupName="Waveform"
+                         Checked="SetWaveForm"
+                         VerticalAlignment="Bottom" Content="Square" FontSize="10" Padding="0,0,0,0" FontFamily="Arial Black" Height="17" Width="59" BorderThickness="2,2,2,2.2" Background="{x:Null}">
+                                <RadioButton.BorderBrush>
+                                    <ImageBrush ImageSource="/Visuals/btn_enable.png"/>
+                                </RadioButton.BorderBrush>
+                            </RadioButton>
+                            <RadioButton x:Name="Saw"
+                         Margin="7,6,0,0"
+                         GroupName="Waveform"
+                         Checked="SetWaveForm"
+                         VerticalAlignment="Top" Content="Saw" Width="42" Height="17" FontSize="10" Padding="0,0,-2,0" FontFamily="Arial Black" Background="{x:Null}" BorderThickness="2,2,2,2.2">
+                                <RadioButton.BorderBrush>
+                                    <ImageBrush ImageSource="/Visuals/btn_enable.png"/>
+                                </RadioButton.BorderBrush>
+                            </RadioButton>
+                            <RadioButton x:Name="Triangle"
+                         Margin="-123,0,0,21"
+                         GroupName="Waveform"
+                         Checked="SetWaveForm"
+                         VerticalAlignment="Bottom" Content="Triangle" FontSize="10" Padding="0,0,-2,0" FontFamily="Arial Black" Height="17" Width="61" BorderThickness="2,2,2,2.2" Background="{x:Null}">
+                                <RadioButton.BorderBrush>
+                                    <ImageBrush ImageSource="/Visuals/btn_enable.png"/>
+                                </RadioButton.BorderBrush>
+                            </RadioButton>
+                            <RadioButton x:Name="Whitenoise"
+                         Margin="-255,10,14,2"
+                         GroupName="Waveform"
+                         Checked="SetWaveForm"
+                         VerticalAlignment="Bottom" Content="White noise" FontFamily="Arial Black" FontSize="10" Padding="0,0,-2,0" Width="79" Height="20" Background="{x:Null}" BorderThickness="2,2,2,2.2">
+                                <RadioButton.BorderBrush>
+                                    <ImageBrush ImageSource="/Visuals/btn_enable.png"/>
+                                </RadioButton.BorderBrush>
+                            </RadioButton>
+                            <RadioButton x:Name="Pinknoise"
+                         Margin="-110,0,0,2"
+                         GroupName="Waveform"
+                         Checked="SetWaveForm"
+                         VerticalAlignment="Bottom" Content="Pink noise" Padding="0,0,-3,0" Width="74" Height="20" FontSize="10" FontFamily="Arial Black" BorderThickness="2,2,2,2.2" Background="{x:Null}">
+                                <RadioButton.BorderBrush>
+                                    <ImageBrush ImageSource="/Visuals/btn_enable.png"/>
+                                </RadioButton.BorderBrush>
+                            </RadioButton>
+                        </StackPanel>
+                    </Border>
+                    <Border Width="247" HorizontalAlignment="Left" Height="60" BorderThickness="7,5,2,5" Panel.ZIndex="-2" Margin="794,0,0,0">
+                    </Border>
+                    <StackPanel Orientation="Horizontal"
+                Margin="424,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="60" Width="185">
+                        <Label
+               Margin="10,0,0,0"
+               Content="Octave:" Height="28" VerticalAlignment="Center" FontWeight="Bold" Width="64" FontFamily="Arial Black" Padding="0,0,0,0" FontSize="12" VerticalContentAlignment="Center"/>
+                        <RadioButton x:Name="A2"
+                         Margin="0,10,0,0"
+                         GroupName="Octave"
+                        
+                         Checked="SetOctave"
+                         VerticalAlignment="Top" ClickMode="Press" BorderThickness="2,2,2,2.2" Background="{x:Null}" Content="A2" FontFamily="Arial Black" Width="50" Height="20" Padding="0,0,0,0">
+                        </RadioButton>
+                        <RadioButton x:Name="A3"
+                         Margin="0,10,0,0"
+                         GroupName="Octave"
+                         Checked="SetOctave"
+                         VerticalAlignment="Top" Foreground="Black" FontWeight="Bold" ClickMode="Press" Background="{x:Null}" Content="A3" FontFamily="Arial Black" BorderThickness="2,2,2,2.2" Padding="0,0,0,0">
+                        </RadioButton>
+                        <RadioButton x:Name="A4"
+                         Margin="-93,0,0,10"
+                         GroupName="Octave"
+                         IsChecked="true"
+                         Checked="SetOctave"
+                         VerticalAlignment="Bottom" ClickMode="Press" Padding="0,0,0,0" BorderThickness="2,2,2,2.2" Background="{x:Null}" Content="A4" Width="50" FontFamily="Arial Black" Height="20" HorizontalAlignment="Left">
+                        </RadioButton>
+                        <RadioButton x:Name="A5"
+                         Margin="-43,0,0,10"
+                         GroupName="Octave"
+                         Checked="SetOctave"
+                         VerticalAlignment="Bottom" ClickMode="Press" Background="{x:Null}" Content="A5" FontFamily="Arial Black" BorderThickness="2,2,2,2.2" HorizontalAlignment="Left" Width="50" Height="20" Padding="0,0,0,0">
+                        </RadioButton>
+
+                    </StackPanel>
+                    <Slider x:Name="phaser" Style = "{StaticResource Horizontal_Slider}"
+            Margin="861,0,0,0"
+            Orientation="Horizontal"
+            Minimum="0.0"
+            Maximum="1.0"
+            Value="{Binding Level1}"
+            VerticalAlignment="Center" BorderThickness="20,0,0,0" BorderBrush="#FFB72F2F" Width="178" HorizontalAlignment="Left"
+            />
+                    <Label x:Name="VOLUME_Label_Copy"
+                                Width="60"
+                                Margin="801,0,0,0"
+                                FontWeight="Bold"
+                                HorizontalAlignment="Left"
+                                Content="LEVEL" VerticalAlignment="Center" FontFamily="Arial Black" BorderThickness="0,0,2,0" Padding="0,0,0,0" Height="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Foreground="#FF6A360F" Panel.ZIndex="-1" FontSize="16">
+                    </Label>
+                    <Label Width="60" HorizontalAlignment="Left" Content="{Binding Level1Label}" Margin="801,30,0,0" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{Binding Background, ElementName=VOLUME_Label}" BorderThickness="0,0,0,0" FontSize="{Binding FontSize, ElementName=VOLUME_Label}" Padding="0,0,0,0" FontFamily="{Binding FontFamily, ElementName=VOLUME_Label}" VerticalAlignment="Top" Foreground="#FF6A360F"/>
+                    <Border Width="121" HorizontalAlignment="Left" Height="60" BorderThickness="0,5,5,5" Panel.ZIndex="-2" Margin="1039,0,0,0">
+                        <ComboBox x:Name="Preset" Width="114" 
+                              HorizontalAlignment="Left"
+                              SelectionChanged="Presets" Background="{x:Null}" FontSize="12" Foreground="Black" IsSynchronizedWithCurrentItem="True" Cursor="ScrollS" HorizontalContentAlignment="Center" Padding="15,0,0,0" Height="25" Margin="2,0,0,0" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="0,0,0,0" VerticalContentAlignment="Center">
+                            <ComboBoxItem Content="Default"/>
+                            <ComboBoxItem Content="Tollers"/>
+                            <ComboBoxItem Content="Pads"/>
+                            <ComboBoxItem Content="Phaser Bass"/>
+                            <ComboBoxItem Content="Lead"/>
+                            <ComboBoxItem Content="Subber"/>
+                            <ComboBoxItem Content="Plate"/>
+
+                        </ComboBox>
+                    </Border>
+                    <Label x:Name="VOLUME_Label_Copy1"
+                        Width="114"
+                        Margin="1041,5,0,0"
+                        FontWeight="Bold"
+                        HorizontalAlignment="Left"
+                        Content="PRESET" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="0,0,0,0" Padding="0,0,0,0" Height="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Foreground="#FF6A360F" Panel.ZIndex="-1" FontSize="16">
+                    </Label>
+                </Grid>
+                <StackPanel Orientation="Horizontal" Margin="430,60,1326,359" Grid.Row="1" Height="40">
+                    <Label x:Name="TremFreq"
+               Width="60"
+           Margin="0,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="FREQ" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                    </Label>
+                    <Label x:Name="gain" Content="{Binding TremoloGainLabel}"
+                            
+               Width="60"
+               FontWeight="Bold" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="60,0,0,0">
+                    </Label>
+                    <Label x:Name="Freq" Content="{Binding TremoloFreqLabel}"
+               Width="60"
+           Margin="-180,0,0,0"
+               FontWeight="Bold" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalAlignment="Left">
+                    </Label>
+                    <Label x:Name="TremGain"
+               Width="60"
+           Margin="-60,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="GAIN" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                    </Label>
+                    <Label x:Name="ActivateTrem"
+               Width="60"
+           Margin="-120,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="ACTIVATE" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="10">
+                    </Label>
+                    <Label
+                            
+               Width="60"
+           Margin="-120,0,0,0"
+               FontWeight="Bold" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" HorizontalAlignment="Left">
+                        <CheckBox Name="Tremolo"
+                      Checked="Tremolo_checked"
+                      Unchecked="Tremolo_unchecked"
+                      Content="" Width="16" Height="15" FontSize="12" Background="#FFC88A59" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        </CheckBox>
+                    </Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="615,60,1141,359" Grid.Row="1" Height="40">
+                    <Label x:Name="ChorusWidth"
+               Width="60"
+           Margin="0,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="WIDTH" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                    </Label>
+                    <Label x:Name="ChorusSweep"
+               Width="60"
+               FontWeight="Bold"
+           Content="SWEEP" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11" VerticalAlignment="Top">
+                    </Label>
+                    <Label x:Name="ChorusDelay"
+               Width="60"
+               FontWeight="Bold"
+           Content="DELAY" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11" VerticalAlignment="Top">
+                    </Label>
+                    <Label x:Name="Choruswidth" Content="{Binding ChorusWidthLabel}"
+                            
+               Width="60"
+               FontWeight="Bold" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-180,0,0,0">
+                    </Label>
+                    <Label Content="{Binding ChorusDelayLabel}"
+                            
+               Width="60"
+           Margin="-60,0,0,0"
+               FontWeight="Bold" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" HorizontalAlignment="Left">
+                    </Label>
+                    <Label Content="{Binding ChorusSweepLabel}"
+                            
+                                Width="60"
+                                FontWeight="Bold" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Bottom" Margin="-120,0,0,0" HorizontalAlignment="Left">
+                    </Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="800,60,776,359" Grid.Row="1">
+                    <Label
+               Width="60"
+           Margin="0,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="DRY" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                    </Label>
+                    <Label
+               Width="60"
+           Margin="0,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="WET" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                    </Label>
+                    <Label
+               Width="60"
+           Margin="0,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="FEEDBACK" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="9">
+                    </Label>
+                    <Label
+               Width="60"
+           Margin="0,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="FREQ" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                    </Label>
+                    <Label
+               Width="60"
+           Margin="0,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="WIDTH" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                    </Label>
+                    <Label
+               Width="60"
+           Margin="0,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="SWEEP" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                    </Label>
+                    <Label Content="{Binding PhaserDryLabel}"
+                            
+               Width="60"
+           Margin="-360,0,0,0"
+               FontWeight="Bold" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" HorizontalAlignment="Left">
+                    </Label>
+                    <Label Content="{Binding PhaserWetLabel}"
+                            
+               Width="60"
+           Margin="-300,0,0,0"
+               FontWeight="Bold" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" HorizontalAlignment="Left">
+                    </Label>
+                    <Label Content="{Binding PhaserFeedbackLabel}"
+                            
+               Width="60"
+           Margin="-240,0,0,0"
+               FontWeight="Bold" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" HorizontalAlignment="Left">
+                    </Label>
+                    <Label Content="{Binding PhaserFreqLabel}"
+                            
+               Width="60"
+           Margin="-180,0,0,0"
+               FontWeight="Bold" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" HorizontalAlignment="Left">
+                    </Label>
+                    <Label Content="{Binding PhaserWidthLabel}"
+                            
+               Width="60"
+           Margin="-120,0,0,0"
+               FontWeight="Bold" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" HorizontalAlignment="Left">
+                    </Label>
+                    <Label Content="{Binding PhaserSweepLabel}"
+                            
+               Width="60"
+           Margin="-60,0,0,0"
+               FontWeight="Bold" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" HorizontalAlignment="Left">
+                    </Label>
+                </StackPanel>
+                <Border Margin="430,60,0,0" Width="180" Height="190" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" BorderThickness="1,1,1,1" Panel.ZIndex="-1">
+                    <StackPanel Orientation="Horizontal" Margin="0,39,0,-1" Grid.Row="1">
+                        <Slider x:Name="freq1"  Margin="15,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                                    Orientation="Horizontal"
+                                    Minimum="1"
+                                    Maximum="1000"
+                                    TickFrequency="1"
+                                    Value="{Binding TremoloFreq}" Width="150" VerticalAlignment="Stretch" HorizontalAlignment="Left" Height="30">
+                            <Slider.LayoutTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="270"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Slider.LayoutTransform>
+                        </Slider>
+
+                        <Slider x:Name="gain1"  Margin="90,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                                    Orientation="Horizontal"
+                                    Minimum="0.0"
+                                    Maximum="1.0"
+                                    TickFrequency="0.1"
+                                    Value="{Binding TremoloGain}" Width="150" VerticalAlignment="Stretch" HorizontalAlignment="Left" Height="30">
+                            <Slider.LayoutTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="270"/>
+                                </TransformGroup>
+                            </Slider.LayoutTransform>
+                        </Slider>
+                    </StackPanel>
+                </Border>
+                <Border Margin="615,60,0,0" Width="180" Height="190" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" BorderThickness="1,1,1,1" Panel.ZIndex="-1">
+                    <StackPanel Orientation="Horizontal" Margin="0,39,45,-1" Grid.Row="1"/>
+                </Border>
+                <Border Margin="800,60,0,0" Width="360" Height="190" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" BorderThickness="1,1,1,1" Panel.ZIndex="-1">
+                    <StackPanel Orientation="Horizontal" Margin="0,39,0,-1" Grid.Row="1"/>
+                </Border>
+
+            </Grid>
+        </TabItem>
+
+        <TabItem x:Name="OSC1" Header="OSC 1" Margin="0,-2,0,0" Padding="0,0,0,0" Width="50" BorderBrush="{Binding BorderBrush, ElementName=MainTab}" ClipToBounds="True" Foreground="#FFC88A59">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2851" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200" />
+                    <RowDefinition Height="278.13" />
+                </Grid.RowDefinitions>
+                <!-- <local:WaveformVisualizer
+                    Waveform="{Binding Waveform}" 
+                    Width="{Binding ActualWidth, ElementName=tabControl, Mode=OneWay}" 
+                    Margin="0,-19,0,0" 
+                    UseLayoutRounding="False" 
+                    Cursor="Cross" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    Height="{Binding ActualHeight, ElementName=header, Mode=OneWay}" 
+                    Opacity="1"
+      >
+                    <local:WaveformVisualizer.Effect>
+                        <DropShadowEffect/>
+                    </local:WaveformVisualizer.Effect>
+                    <local:WaveformVisualizer.Clip>
+                            <EllipseGeometry/>
+                        </local:WaveformVisualizer.Clip>
+                </local:WaveformVisualizer>-->
+                <Grid x:Name="SectionGrid2" Grid.Row="1" Panel.ZIndex="-1" Height="60" Width="1160" VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <Slider x:Name="master_vol2" Style = "{StaticResource Horizontal_Slider}"
+            Margin="246,0,0,0"
+            Orientation="Horizontal"
+            Minimum="0"
+            Maximum="1"
+            Value="{Binding Level2}" 
+            Grid.ColumnSpan="1"
+            VerticalAlignment="Center" HorizontalAlignment="Left" Width="173">
+                    </Slider>
+
+                    <Label Width="120" HorizontalAlignment="Left" Content="{Binding Level2Label}" Margin="119,30,0,0" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{Binding Background, ElementName=VOLUME_Label}" BorderThickness="5,0,0,5" FontSize="{Binding FontSize, ElementName=VOLUME_Label}" Padding="0,0,0,0" FontFamily="{Binding FontFamily, ElementName=VOLUME_Label}" VerticalAlignment="Top" Foreground="#FF6A360F"/>
+                    <Label x:Name="VOLUME_Label2"
+               Width="120"
+           Margin="119,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="LEVEL" VerticalAlignment="Center" FontFamily="Arial Black" BorderThickness="5,5,0,5" Padding="0,0,0,0" Height="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Foreground="#FF6A360F" Panel.ZIndex="-1" FontSize="16">
+                    </Label>
+                </Grid>
+                <StackPanel Grid.Row="1"
+                            Orientation="Vertical" Margin="245,100,2426,28"
+                            >
+                    <Label Content="WAVEFORM"
+               Width="180"
+               FontWeight="Bold" FontFamily="Arial Black" BorderThickness="1,1,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11" Margin="0,12,0,-150">
+                    </Label>
+                    <StackPanel Orientation="Horizontal"
+                        Width="180" Height="60" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,90,0,0" >
+                        <RadioButton x:Name="Sine2"
+                         Margin="5,6,0,0"
+                         GroupName="Waveform2"
+                         IsChecked="true"
+                         Checked="SetWaveForm"
+                         VerticalAlignment="Top" Content="Sine" Width="43" Height="17" FontSize="10" Padding="0,0,0,0" FontFamily="Arial Black" BorderThickness="2,2,2,2.2" Background="{x:Null}">
+                        </RadioButton>
+                        <RadioButton x:Name="Square2"
+                         Margin="-43,0,0,21"
+                         GroupName="Waveform2"
+                         Checked="SetWaveForm"
+                         VerticalAlignment="Bottom" Content="Square" FontSize="10" Padding="0,0,0,0" FontFamily="Arial Black" Height="17" Width="59" BorderThickness="2,2,2,2.2" Background="{x:Null}">
+                        </RadioButton>
+                        <RadioButton x:Name="Saw2"
+                         Margin="25,6,0,0"
+                         GroupName="Waveform2"
+                         Checked="SetWaveForm"
+                         VerticalAlignment="Top" Content="Saw" Width="42" Height="17" FontSize="10" Padding="0,0,-2,0" FontFamily="Arial Black" Background="{x:Null}" BorderThickness="2,2,2,2.2">
+                        </RadioButton>
+                        <RadioButton x:Name="Triangle2"
+                         Margin="-42,0,0,21"
+                         GroupName="Waveform2"
+                         Checked="SetWaveForm"
+                         VerticalAlignment="Bottom" Content="Triangle" FontSize="10" Padding="0,0,-2,0" FontFamily="Arial Black" Height="17" Width="61" BorderThickness="2,2,2,2.2" Background="{x:Null}">
+                        </RadioButton>
+                        <RadioButton x:Name="Whitenoise2"
+                         Margin="-197,10,14,2"
+                         GroupName="Waveform2"
+                         Checked="SetWaveForm"
+                         VerticalAlignment="Bottom" Content="White noise" FontFamily="Arial Black" FontSize="10" Padding="0,0,-2,0" Width="79" Height="20" Background="{x:Null}" BorderThickness="2,2,2,2.2">
+                        </RadioButton>
+                        <RadioButton x:Name="Pinknoise2"
+                         Margin="-61,0,0,2"
+                         GroupName="Waveform2"
+                         Checked="SetWaveForm"
+                         VerticalAlignment="Bottom" Content="Pink noise" Padding="0,0,-3,0" Width="74" Height="20" FontSize="10" FontFamily="Arial Black" BorderThickness="2,2,2,2.2" Background="{x:Null}">
+                        </RadioButton>
+                    </StackPanel>
+                </StackPanel>
+                <Label Content="Envelope ADSR" Grid.Row="1"  HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="2106,50,0,0"/>
+                <StackPanel Orientation="Horizontal" Margin="0,60,2611,178" Grid.Row="1" Height="40">
+                    <Label x:Name="Attack2"
+               Width="60"
+           Margin="0,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="ATTACK" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                    </Label>
+                    <Label x:Name="AttackVol2"
+               Width="60"
+           Margin="-60,0,0,0"
+               FontWeight="Bold"
+           Content="{Binding Attack2Label}" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" HorizontalAlignment="Left">
+                    </Label>
+                    <Label x:Name="Decay2"
+               Width="60"
+           Margin="0,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="DECAY" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                    </Label>
+                    <Label x:Name="DecayVol2"
+               Width="60"
+           Margin="-60,0,0,0"
+               FontWeight="Bold"
+           Content="{Binding Decay2Label}" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" HorizontalAlignment="Left">
+                    </Label>
+                    <Label x:Name="Sustain2"
+               Width="60"
+           Margin="0,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="SUSTAIN" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                    </Label>
+                    <Label x:Name="SustainVol2"
+               Width="60"
+           Margin="-60,0,0,0"
+               FontWeight="Bold"
+           Content="{Binding Sustain2Label}" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16">
+                    </Label>
+                    <Label x:Name="Release2"
+               Width="60"
+           Margin="0,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                        <Label x:Name="Release2_Copy"
+                            Width="60"
+                            FontWeight="Bold"
+                            Content="RELEASE" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11" Margin="-1,-1,0,0">
+                        </Label>
+                    </Label>
+                    <Label x:Name="ReleaseVol2"
+               Width="60"
+           Margin="-60,0,0,0"
+               FontWeight="Bold"
+           Content="{Binding Release2Label}" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16">
+                    </Label>
+                </StackPanel>
+                <Border Margin="0,60,0,0" Width="240" Height="190" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" BorderThickness="1,1,1,1" Panel.ZIndex="-1">
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Width="298" Margin="0,39,0,0" Height="150">
+                        <Slider x:Name="attack2" Style="{StaticResource Horizontal_Slider}"
+                Orientation="Horizontal"
+                Minimum="0.0"
+                Maximum="5.0"
+                Value="{Binding Attack2}" Width="150" Height="30" Margin="15,-2,0,0" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" >
+                            <Slider.LayoutTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="270"/>
+                                </TransformGroup>
+                            </Slider.LayoutTransform>
+                        </Slider>
+                        <Slider x:Name="decay2" Margin="30,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                Orientation="Horizontal"
+                Minimum="0.0"
+                Maximum="2.0"
+                Value="{Binding Decay2}" RenderTransformOrigin="3.481,0.512" Width="150" VerticalAlignment="Stretch" Height="30">
+                            <Slider.LayoutTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="270"/>
+                                </TransformGroup>
+                            </Slider.LayoutTransform>
+                        </Slider>
+
+                        <Slider x:Name="sustain2" Margin="30,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                Orientation="Horizontal"
+                Minimum="0.0"
+                Maximum="1.0"
+                Value="{Binding Sustain2}" HorizontalAlignment="Left" Width="150" Height="30">
+                            <Slider.LayoutTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="270"/>
+                                </TransformGroup>
+                            </Slider.LayoutTransform>
+                        </Slider>
+
+                        <Slider x:Name="release2"  Margin="30,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                Orientation="Horizontal"
+                Minimum="0.03"
+                Maximum="5.0"
+                Value="{Binding Release2}" Width="150" VerticalAlignment="Stretch" HorizontalAlignment="Left" Height="30">
+                            <Slider.LayoutTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="270"/>
+                                </TransformGroup>
+                            </Slider.LayoutTransform>
+                        </Slider>
+                    </StackPanel>
+                </Border>
+                <Grid x:Name="footer2" Grid.Row="1" Margin="0,0,0,-12" Width="{Binding ActualWidth, ElementName=tabControl, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                    <Border Width="240" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1,1,1,1">
+                        <Label Content="Envelope ADSR"  HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,0,0" FontFamily="Arial Black" Foreground="#FFC88A59" FontSize="18"/>
+                    </Border>
+                    <Border Width="180" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1,1,1,1" Margin="245,0,0,0">
+                        <Label Content="Tonality"  HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,0,0" FontFamily="Arial Black" Foreground="#FFC88A59" FontSize="18"/>
+                    </Border>
+
+                </Grid>
+                <Border Margin="245,60,0,0" Width="180" Height="190" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" BorderThickness="1,1,1,1" Panel.ZIndex="-1">
+                    <StackPanel Orientation="Horizontal" Margin="-1,-1,0,149" Grid.Row="1" Height="40">
+                        <Label Content="OCTAVE"
+               Width="90"
+           Margin="0,0,0,0"
+               FontWeight="Bold" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                        </Label>
+                        <ComboBox x:Name="Semitone" Width="90"
+                              SelectionChanged="Semitone2_SelectionChanged" Background="{x:Null}" Padding="10,3,0,0" FontFamily="Arial Black" FontSize="12" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,0" BorderThickness="0,0,0,0" HorizontalContentAlignment="Center">
+                            <ComboBoxItem IsSelected="True" Content="+0"/>
+                            <ComboBoxItem Content="+1"/>
+                            <ComboBoxItem Content="+2"/>
+                            <ComboBoxItem Content="+3"/>
+                            <ComboBoxItem Content="+4"/>
+                            <ComboBoxItem Content="+5"/>
+                            <ComboBoxItem Content="+6"/>
+                            <ComboBoxItem Content="+7"/>
+                            <ComboBoxItem Content="+8"/>
+                            <ComboBoxItem Content="+9"/>
+                            <ComboBoxItem Content="+10"/>
+                            <ComboBoxItem Content="+11"/>
+                            <ComboBoxItem Content="+12"/>
+
+                        </ComboBox>
+                        <Border Width="90" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-180,0,0,0" BorderThickness="1,0,1,1" Panel.ZIndex="1" Cursor="ScrollS">
+                        </Border>
+                        <Border Width="90" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-90,0,0,0" BorderThickness="1,0,1,1" Panel.ZIndex="1" Cursor="ScrollS">
+                        </Border>
+                        <ComboBox x:Name="Octave" Width="90" 
+                              HorizontalAlignment="Left"
+                              SelectionChanged="Octave2_SelectionChanged" Background="{x:Null}" FontSize="12" Foreground="Black" IsSynchronizedWithCurrentItem="True" Cursor="UpArrow" HorizontalContentAlignment="Center" Padding="10,3,0,0" Height="20" Margin="-180,0,0,0" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="0,0,0,0">
+                            <ComboBoxItem  IsSelected="True" Content="+0"/>
+                            <ComboBoxItem Content="+1"/>
+                            <ComboBoxItem Content="+2"/>
+
+                        </ComboBox>
+                        <Label 
+                            Width="90"
+                            FontWeight="Bold"
+                            Content="SEMITONE" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11" VerticalAlignment="Top" Margin="-90,0,0,0">
+                        </Label>
+                    </StackPanel>
+                </Border>
+
+
+            </Grid>
+
+        </TabItem>
+        <TabItem x:Name="OSC2" Header="OSC 2" Margin="0,-2,0,0" Padding="0,0,0,0" Width="50" BorderBrush="{Binding BorderBrush, ElementName=MainTab}" ClipToBounds="True" Foreground="#FFC88A59">
+            <Grid VerticalAlignment="Top" Height="565">
+                <Grid VerticalAlignment="Top" Height="565">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="244" />
+                        <ColumnDefinition Width="3522"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="400" />
+                    </Grid.RowDefinitions>
+                    <!--<local:WaveformVisualizer
+      Grid.Column="0"
+      Grid.Row="0"
+      Waveform="{Binding Waveform}" Margin="0,0,2606,200" Width="Auto"
+                    
+      />-->
+                    <Grid x:Name="SectionGrid3" Panel.ZIndex="-1" Height="60" Width="1160" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,200,0,0" Grid.ColumnSpan="2">
+                        <Slider x:Name="master_vol3" Style = "{StaticResource Horizontal_Slider}"
+            Margin="246,0,0,0"
+            Orientation="Horizontal"
+            Minimum="0"
+            Maximum="1"
+            Value="{Binding Level3}" 
+            Grid.ColumnSpan="1"
+            VerticalAlignment="Center" HorizontalAlignment="Left" Width="173">
+                        </Slider>
+
+                        <Label Width="120" HorizontalAlignment="Left" Content="{Binding Level3Label}" Margin="119,30,0,0" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{Binding Background, ElementName=VOLUME_Label}" BorderThickness="5,0,0,5" FontSize="{Binding FontSize, ElementName=VOLUME_Label}" Padding="0,0,0,0" FontFamily="{Binding FontFamily, ElementName=VOLUME_Label}" VerticalAlignment="Top" Foreground="#FF6A360F"/>
+                        <Label x:Name="VOLUME_Label3"
+               Width="120"
+           Margin="119,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="LEVEL" VerticalAlignment="Center" FontFamily="Arial Black" BorderThickness="5,5,0,5" Padding="0,0,0,0" Height="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Foreground="#FF6A360F" Panel.ZIndex="-1" FontSize="16">
+                        </Label>
+                    </Grid>
+                    <StackPanel
+                            Orientation="Vertical" Margin="1,300,3341,-49" Grid.Column="1"
+                            >
+                        <Label Content="WAVEFORM"
+               Width="180"
+               FontWeight="Bold" FontFamily="Arial Black" BorderThickness="1,1,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11" Margin="0,12,0,-150">
+                        </Label>
+                        <StackPanel Orientation="Horizontal"
+                        Width="180" Height="60" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,90,0,0" >
+                            <RadioButton x:Name="Sine3"
+                         Margin="5,6,0,0"
+                         GroupName="Waveform3"
+                         IsChecked="true"
+                         Checked="SetWaveForm"
+                         VerticalAlignment="Top" Content="Sine" Width="43" Height="17" FontSize="10" Padding="0,0,0,0" FontFamily="Arial Black" BorderThickness="2,2,2,2.2" Background="{x:Null}">
+                            </RadioButton>
+                            <RadioButton x:Name="Square3"
+                         Margin="-43,0,0,21"
+                         GroupName="Waveform3"
+                         Checked="SetWaveForm"
+                         VerticalAlignment="Bottom" Content="Square" FontSize="10" Padding="0,0,0,0" FontFamily="Arial Black" Height="17" Width="59" BorderThickness="2,2,2,2.2" Background="{x:Null}">
+                            </RadioButton>
+                            <RadioButton x:Name="Saw3"
+                         Margin="25,6,0,0"
+                         GroupName="Waveform3"
+                         Checked="SetWaveForm"
+                         VerticalAlignment="Top" Content="Saw" Width="42" Height="17" FontSize="10" Padding="0,0,-2,0" FontFamily="Arial Black" Background="{x:Null}" BorderThickness="2,2,2,2.2">
+                            </RadioButton>
+                            <RadioButton x:Name="Triangle3"
+                         Margin="-42,0,0,21"
+                         GroupName="Waveform3"
+                         Checked="SetWaveForm"
+                         VerticalAlignment="Bottom" Content="Triangle" FontSize="10" Padding="0,0,-2,0" FontFamily="Arial Black" Height="17" Width="61" BorderThickness="2,2,2,2.2" Background="{x:Null}">
+                            </RadioButton>
+                            <RadioButton x:Name="Whitenoise3"
+                         Margin="-197,10,14,2"
+                         GroupName="Waveform3"
+                         Checked="SetWaveForm"
+                         VerticalAlignment="Bottom" Content="White noise" FontFamily="Arial Black" FontSize="10" Padding="0,0,-2,0" Width="79" Height="20" Background="{x:Null}" BorderThickness="2,2,2,2.2">
+                            </RadioButton>
+                            <RadioButton x:Name="Pinknoise3"
+                         Margin="-61,0,0,2"
+                         GroupName="Waveform3"
+                         Checked="SetWaveForm"
+                         VerticalAlignment="Bottom" Content="Pink noise" Padding="0,0,-3,0" Width="74" Height="20" FontSize="10" FontFamily="Arial Black" BorderThickness="2,2,2,2.2" Background="{x:Null}">
+                            </RadioButton>
+                        </StackPanel>
+                    </StackPanel>
+                    <Label Content="Envelope ADSR"  HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="1862,150,0,0" Grid.Column="1"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,260,4,100" Height="40">
+                        <Label x:Name="Attack3"
+               Width="60"
+           Margin="0,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="ATTACK" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                        </Label>
+                        <Label x:Name="AttackVol3"
+               Width="60"
+           Margin="-60,0,0,0"
+               FontWeight="Bold"
+           Content="{Binding Attack3Label}" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" HorizontalAlignment="Left">
+                        </Label>
+                        <Label x:Name="Decay3"
+               Width="60"
+           Margin="0,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="DECAY" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                        </Label>
+                        <Label x:Name="DecayVol3"
+               Width="60"
+           Margin="-60,0,0,0"
+               FontWeight="Bold"
+           Content="{Binding Decay3Label}" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" HorizontalAlignment="Left">
+                        </Label>
+                        <Label x:Name="Sustain3"
+               Width="60"
+           Margin="0,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="SUSTAIN" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                        </Label>
+                        <Label x:Name="SustainVol3"
+               Width="60"
+           Margin="-60,0,0,0"
+               FontWeight="Bold"
+           Content="{Binding Sustain3Label}" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16">
+                        </Label>
+                        <Label x:Name="Release3"
+               Width="60"
+           Margin="0,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                            <Label x:Name="Release3_Copy"
+                            Width="60"
+                            FontWeight="Bold"
+                            Content="RELEASE" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11" Margin="-1,-1,0,0">
+                            </Label>
+                        </Label>
+                        <Label x:Name="ReleaseVol3"
+               Width="60"
+           Margin="-60,0,0,0"
+               FontWeight="Bold"
+           Content="{Binding Release3Label}" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16">
+                        </Label>
+                    </StackPanel>
+                    <Border Margin="0,0,0,-50" Width="240" Height="190" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderThickness="1,1,1,1" Panel.ZIndex="-1">
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,39,-1,-1" Height="150">
+                            <Slider x:Name="attack3" Style="{StaticResource Horizontal_Slider}"
+                Orientation="Horizontal"
+                Minimum="0.0"
+                Maximum="5.0"
+                Value="{Binding Attack3}" Width="150" Height="30" Margin="15,-2,0,0" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" >
+                                <Slider.LayoutTransform>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="270"/>
+                                    </TransformGroup>
+                                </Slider.LayoutTransform>
+                            </Slider>
+                            <Slider x:Name="decay3" Margin="30,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                Orientation="Horizontal"
+                Minimum="0.0"
+                Maximum="2.0"
+                Value="{Binding Decay3}" RenderTransformOrigin="3.481,0.512" Width="150" VerticalAlignment="Stretch" Height="30">
+                                <Slider.LayoutTransform>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="270"/>
+                                    </TransformGroup>
+                                </Slider.LayoutTransform>
+                            </Slider>
+
+                            <Slider x:Name="sustain3" Margin="30,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                Orientation="Horizontal"
+                Minimum="0.0"
+                Maximum="1.0"
+                Value="{Binding Sustain3}" HorizontalAlignment="Left" Width="150" Height="30">
+                                <Slider.LayoutTransform>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="270"/>
+                                    </TransformGroup>
+                                </Slider.LayoutTransform>
+                            </Slider>
+
+                            <Slider x:Name="release3"  Margin="30,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                Orientation="Horizontal"
+                Minimum="0.03"
+                Maximum="5.0"
+                Value="{Binding Release3}" Width="150" VerticalAlignment="Stretch" HorizontalAlignment="Left" Height="30">
+                                <Slider.LayoutTransform>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="270"/>
+                                    </TransformGroup>
+                                </Slider.LayoutTransform>
+                            </Slider>
+                        </StackPanel>
+                    </Border>
+                    <Grid x:Name="footer3" Margin="0,0,0,-90" Width="{Binding ActualWidth, ElementName=tabControl, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.ColumnSpan="2">
+                        <Border Width="240" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1,1,1,1">
+                            <Label Content="Envelope ADSR"  HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,0,0" FontFamily="Arial Black" Foreground="#FFC88A59" FontSize="18"/>
+                        </Border>
+                        <Border Width="180" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1,1,1,1" Margin="245,0,0,0">
+                            <Label Content="Tonality"  HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,0,0" FontFamily="Arial Black" Foreground="#FFC88A59" FontSize="18"/>
+                        </Border>
+
+                    </Grid>
+                    <Border Margin="1,0,0,-50" Width="180" Height="190" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderThickness="1,1,1,1" Panel.ZIndex="-1" Grid.Column="1">
+                        <StackPanel Orientation="Horizontal" Margin="-1,-1,0,149" Grid.Row="1" Height="40">
+                            <Label Content="OCTAVE"
+               Width="90"
+           Margin="0,0,0,0"
+               FontWeight="Bold" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
+                            </Label>
+                            <ComboBox x:Name="Semitone1" Width="90"
+                              SelectionChanged="Semitone3_SelectionChanged" Background="{x:Null}" Padding="10,3,0,0" FontFamily="Arial Black" FontSize="12" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,0" BorderThickness="0,0,0,0" HorizontalContentAlignment="Center">
+                                <ComboBoxItem  IsSelected="True" Content="+0"/>
+                                <ComboBoxItem Content="+1"/>
+                                <ComboBoxItem Content="+2"/>
+                                <ComboBoxItem Content="+3"/>
+                                <ComboBoxItem Content="+4"/>
+                                <ComboBoxItem Content="+5"/>
+                                <ComboBoxItem Content="+6"/>
+                                <ComboBoxItem Content="+7"/>
+                                <ComboBoxItem Content="+8"/>
+                                <ComboBoxItem Content="+9"/>
+                                <ComboBoxItem Content="+10"/>
+                                <ComboBoxItem Content="+11"/>
+                                <ComboBoxItem Content="+12"/>
+
+                            </ComboBox>
+                            <Border Width="90" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-180,0,0,0" BorderThickness="1,0,1,1" Panel.ZIndex="1" Cursor="ScrollS">
+                            </Border>
+                            <Border x:Name="Semitone2" Width="90" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-90,0,0,0" BorderThickness="1,0,1,1" Panel.ZIndex="1" Cursor="ScrollS">
+                            </Border>
+                            <ComboBox x:Name="Octave1" Width="90" 
+                              HorizontalAlignment="Left"
+                              SelectionChanged="Octave3_SelectionChanged" Background="{x:Null}" FontSize="12" Foreground="Black" IsSynchronizedWithCurrentItem="True" Cursor="UpArrow" HorizontalContentAlignment="Center" Padding="10,3,0,0" Height="20" Margin="-180,0,0,0" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="0,0,0,0">
+                                <ComboBoxItem  IsSelected="True" Content="+0"/>
+                                <ComboBoxItem Content="+1"/>
+                                <ComboBoxItem Content="+2"/>
+
+                            </ComboBox>
+                            <Label
+                            Width="90"
+                            FontWeight="Bold"
+                            Content="SEMITONE" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11" VerticalAlignment="Top" Margin="-90,0,0,0">
+                            </Label>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+        </TabItem>
+    </TabControl>
+
+</Window>

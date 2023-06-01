@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ResolveNugetPackages>false</ResolveNugetPackages>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F125CEC5-CF87-3127-A88C-80BAE64EB191}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>D:\repo\VST\AudioPlugSharp-0.4\vst3sdk;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>D:\repo\VST\AudioPlugSharp-0.4\vst3sdk;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/repo/VST/AudioPlugSharp-0.4/vst3sdk/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+D:\Programs\Cmake\bin\cmake.exe -SD:/repo/VST/AudioPlugSharp-0.4/vst3sdk -BD:/repo/VST/AudioPlugSharp-0.4/vstbuild --check-stamp-file D:/repo/VST/AudioPlugSharp-0.4/vstbuild/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeCCompiler.cmake.in;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeCCompilerABI.c;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeCInformation.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeCXXCompiler.cmake.in;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeCXXCompilerABI.cpp;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeCXXInformation.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeCommonLanguageInclude.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeCompilerIdDetection.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeDetermineCCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeDetermineCXXCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeDetermineCompileFeatures.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeDetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeDetermineCompilerABI.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeDetermineCompilerId.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeDetermineRCCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeDetermineSystem.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeFindBinUtils.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeGenericSystem.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeInitializeConfigs.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeLanguageInformation.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeParseArguments.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeParseImplicitIncludeInfo.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeParseImplicitLinkInfo.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeParseLibraryArchitecture.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakePrintHelpers.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeRCCompiler.cmake.in;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeRCInformation.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeSystem.cmake.in;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeSystemSpecificInformation.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeSystemSpecificInitialize.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeTestCCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeTestCXXCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeTestCompilerCommon.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeTestRCCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\ARMClang-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\GNU-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\HP-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\LCC-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\MSVC-C.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\MSVC-CXX.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\MSVC.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\NVHPC-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\TI-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Tasking-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\XL-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\zOS-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CompilerId\VS-10.vcxproj.in;D:\Programs\Cmake\share\cmake-3.26\Modules\Internal\FeatureTesting.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Platform\Windows-Determine-CXX.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Platform\Windows-MSVC-C.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Platform\Windows-MSVC.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Platform\Windows.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Platform\WindowsPaths.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_AAXSupport.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_AddCommonOptions.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_AddSMTGLibrary.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_AddVST3Library.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_AddVST3Options.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_Bundle.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_CodeSign.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_ConfigureCmakeGenerator.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_CoreAudioSupport.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_CustomModuleTarget.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_DetectPlatform.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_ExportedSymbols.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_Global.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_PlatformIOS.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_PlatformToolset.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_Platform_Windows.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_PrefixHeader.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_SetupVST3LibraryDefaultPath.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_UniversalBinary.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_VST3_SDK.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_VstGuiSupport.cmake;D:\repo\VST\AudioPlugSharp-0.4\vstbuild\CMakeFiles\3.26.4\CMakeCCompiler.cmake;D:\repo\VST\AudioPlugSharp-0.4\vstbuild\CMakeFiles\3.26.4\CMakeCXXCompiler.cmake;D:\repo\VST\AudioPlugSharp-0.4\vstbuild\CMakeFiles\3.26.4\CMakeRCCompiler.cmake;D:\repo\VST\AudioPlugSharp-0.4\vstbuild\CMakeFiles\3.26.4\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\repo\VST\AudioPlugSharp-0.4\vstbuild\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/repo/VST/AudioPlugSharp-0.4/vst3sdk/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+D:\Programs\Cmake\bin\cmake.exe -SD:/repo/VST/AudioPlugSharp-0.4/vst3sdk -BD:/repo/VST/AudioPlugSharp-0.4/vstbuild --check-stamp-file D:/repo/VST/AudioPlugSharp-0.4/vstbuild/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeCCompiler.cmake.in;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeCCompilerABI.c;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeCInformation.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeCXXCompiler.cmake.in;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeCXXCompilerABI.cpp;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeCXXInformation.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeCommonLanguageInclude.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeCompilerIdDetection.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeDetermineCCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeDetermineCXXCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeDetermineCompileFeatures.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeDetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeDetermineCompilerABI.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeDetermineCompilerId.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeDetermineRCCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeDetermineSystem.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeFindBinUtils.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeGenericSystem.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeInitializeConfigs.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeLanguageInformation.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeParseArguments.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeParseImplicitIncludeInfo.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeParseImplicitLinkInfo.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeParseLibraryArchitecture.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakePrintHelpers.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeRCCompiler.cmake.in;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeRCInformation.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeSystem.cmake.in;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeSystemSpecificInformation.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeSystemSpecificInitialize.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeTestCCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeTestCXXCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeTestCompilerCommon.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CMakeTestRCCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\ARMClang-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\GNU-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\HP-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\LCC-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\MSVC-C.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\MSVC-CXX.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\MSVC.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\NVHPC-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\TI-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Tasking-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\XL-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\zOS-C-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\CompilerId\VS-10.vcxproj.in;D:\Programs\Cmake\share\cmake-3.26\Modules\Internal\FeatureTesting.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Platform\Windows-Determine-CXX.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Platform\Windows-MSVC-C.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Platform\Windows-MSVC.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Platform\Windows.cmake;D:\Programs\Cmake\share\cmake-3.26\Modules\Platform\WindowsPaths.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_AAXSupport.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_AddCommonOptions.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_AddSMTGLibrary.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_AddVST3Library.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_AddVST3Options.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_Bundle.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_CodeSign.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_ConfigureCmakeGenerator.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_CoreAudioSupport.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_CustomModuleTarget.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_DetectPlatform.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_ExportedSymbols.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_Global.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_PlatformIOS.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_PlatformToolset.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_Platform_Windows.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_PrefixHeader.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_SetupVST3LibraryDefaultPath.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_UniversalBinary.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_VST3_SDK.cmake;D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\cmake\modules\SMTG_VstGuiSupport.cmake;D:\repo\VST\AudioPlugSharp-0.4\vstbuild\CMakeFiles\3.26.4\CMakeCCompiler.cmake;D:\repo\VST\AudioPlugSharp-0.4\vstbuild\CMakeFiles\3.26.4\CMakeCXXCompiler.cmake;D:\repo\VST\AudioPlugSharp-0.4\vstbuild\CMakeFiles\3.26.4\CMakeRCCompiler.cmake;D:\repo\VST\AudioPlugSharp-0.4\vstbuild\CMakeFiles\3.26.4\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\repo\VST\AudioPlugSharp-0.4\vstbuild\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\ZERO_CHECK.vcxproj">
+      <Project>{E5C1C215-DD61-395B-8BFC-0C04904482EC}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\public.sdk\samples\vst\adelay\adelay.vcxproj">
+      <Project>{938F726B-F154-35D3-B04D-4833998542B9}</Project>
+      <Name>adelay</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\public.sdk\samples\vst\again\again.vcxproj">
+      <Project>{B7E35F45-62BD-33AF-81E2-545BCE3FC5AD}</Project>
+      <Name>again</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\public.sdk\samples\vst\again\againsimple.vcxproj">
+      <Project>{00042FFE-9FA6-3656-B8D9-28B80D2191A6}</Project>
+      <Name>againsimple</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\base\base.vcxproj">
+      <Project>{9716DD5B-C8D4-3842-94BF-62ABA551470F}</Project>
+      <Name>base</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\public.sdk\samples\vst\channelcontext\channelcontext.vcxproj">
+      <Project>{69CAAD97-26D0-36C2-9B97-B3EE3AF96BC2}</Project>
+      <Name>channelcontext</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\public.sdk\samples\vst-hosting\editorhost\editorhost.vcxproj">
+      <Project>{C2BF98BA-3FA9-3CD1-8D70-DFC0C861848A}</Project>
+      <Name>editorhost</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\public.sdk\samples\vst\hostchecker\hostchecker.vcxproj">
+      <Project>{CED66C0D-0AB2-3CF2-B421-F982EA41985E}</Project>
+      <Name>hostchecker</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\public.sdk\samples\vst\legacymidiccout\legacymidiccout.vcxproj">
+      <Project>{D73BEB5E-A8B7-3CC5-BF89-B4A9D51BDE88}</Project>
+      <Name>legacymidiccout</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\public.sdk\samples\vst\mda-vst3\mda-vst3.vcxproj">
+      <Project>{51D1A605-5D60-3468-B0FA-0D11A419F5C4}</Project>
+      <Name>mda-vst3</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\public.sdk\samples\vst\note_expression_synth\noteexpressionsynth.vcxproj">
+      <Project>{4F016AEB-D20E-31EA-BAA9-DB187FA8249E}</Project>
+      <Name>noteexpressionsynth</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\public.sdk\samples\vst\note_expression_text\noteexpressiontext.vcxproj">
+      <Project>{9B5C5737-7D4F-3460-ADBF-9A0EFEDEE0B7}</Project>
+      <Name>noteexpressiontext</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\public.sdk\samples\vst\panner\panner.vcxproj">
+      <Project>{5170D72D-C3BF-3174-AD89-9D0CF8A2249A}</Project>
+      <Name>panner</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\public.sdk\samples\vst\pitchnames\pitchnames.vcxproj">
+      <Project>{672DE5EC-2D99-3864-8E6D-8834BE6E746D}</Project>
+      <Name>pitchnames</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\pluginterfaces\pluginterfaces.vcxproj">
+      <Project>{179DCBA5-59F8-3EF9-A47C-18009AD5998D}</Project>
+      <Name>pluginterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\public.sdk\samples\vst\prefetchablesupport\prefetchablesupport.vcxproj">
+      <Project>{CE166C05-6387-3BB3-B5DF-D21FEFA61657}</Project>
+      <Name>prefetchablesupport</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\public.sdk\samples\vst\programchange\programchange.vcxproj">
+      <Project>{8D557519-4368-36D0-9E00-78A15861A386}</Project>
+      <Name>programchange</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\public.sdk\sdk.vcxproj">
+      <Project>{0ED7AC97-3268-3EF8-BD17-6F9FF51CD0C5}</Project>
+      <Name>sdk</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\public.sdk\sdk_common.vcxproj">
+      <Project>{905B2CA7-5152-33BF-A027-1E5FD9A7FF4D}</Project>
+      <Name>sdk_common</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\public.sdk\sdk_hosting.vcxproj">
+      <Project>{00A75FD3-13DB-314A-8121-B11D50436AEF}</Project>
+      <Name>sdk_hosting</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\public.sdk\samples\vst\syncdelay\syncdelay.vcxproj">
+      <Project>{FA964E9F-268D-33D6-8BD4-C2839192030B}</Project>
+      <Name>syncdelay</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\VSTGUI.build\tools\uidesccompressor\uidesccompressor.vcxproj">
+      <Project>{ABDAB2AE-C5E6-343B-AA78-B475C73E57C1}</Project>
+      <Name>uidesccompressor</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\public.sdk\samples\vst-hosting\validator\validator.vcxproj">
+      <Project>{F6A2AAF0-2AC0-3596-BFD7-674B4C0E031F}</Project>
+      <Name>validator</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\VSTGUI.build\lib\vstgui.vcxproj">
+      <Project>{60881021-991D-3915-A0C8-3C640DFDFD63}</Project>
+      <Name>vstgui</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\vstgui_support.vcxproj">
+      <Project>{FAD20848-CE58-3629-84AA-FA20F4A6C2AE}</Project>
+      <Name>vstgui_support</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\VSTGUI.build\uidescription\vstgui_uidescription.vcxproj">
+      <Project>{E4C9D14E-EAFC-38CF-ABC2-68062CD847C1}</Project>
+      <Name>vstgui_uidescription</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

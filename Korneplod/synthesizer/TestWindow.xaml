@@ -1,0 +1,161 @@
+﻿<UserControl x:Class="synthesizer.TestWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:synthesizer"
+             mc:Ignorable="d" 
+             d:DesignHeight="633" d:DesignWidth="1226" Background="Snow">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="Background" Value="SandyBrown"/>
+        </Style>
+        <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border Height="10" >
+                            <Border BorderThickness="1" Height="5" Margin="-2,0,0,0" BorderBrush="#FF9A9A9A">
+                                <Border.Background>
+                                    <SolidColorBrush Color="Gray"/>
+                                </Border.Background>
+                            </Border>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderRepeatButton1" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border SnapsToDevicePixels="True" Background="Goldenrod"  BorderThickness="1,1,1,1" Height="5" Margin="0,0,-1,0" BorderBrush="#FF9A9A9A"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderThumb" TargetType="Thumb">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Border x:Name="Slider_Border" Height="27" Width="17" Background="#FF9A9A9A">
+                            <Border.OpacityMask>
+                                <ImageBrush ImageSource="/Visuals/metal.png"/>
+                            </Border.OpacityMask>
+                            <Border x:Name="Slider_Rectangle" Height="25" Width="15">
+
+                                <Border.Background>
+                                    <ImageBrush ImageSource="/Visuals/rubber.png"/>
+                                </Border.Background>
+
+                                <Border.OpacityMask>
+                                    <ImageBrush ImageSource="/Visuals/metal.png"/>
+                                </Border.OpacityMask>
+
+                            </Border>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="Slider"  TargetType="Slider">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Track Grid.Row="1" x:Name="PART_Track"   >
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton1}"  Command="Slider.DecreaseLarge" />
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource SliderThumb}"  />
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton}" Command="Slider.IncreaseLarge" />
+                    </Track.IncreaseRepeatButton>
+                </Track>
+            </Grid>
+        </ControlTemplate>
+
+        <Style x:Key="Horizontal_Slider" TargetType="Slider">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Horizontal">
+                    <Setter Property="MinHeight" Value="21" />
+                    <Setter Property="MinWidth" Value="104" />
+                    <Setter Property="Template" Value="{StaticResource Slider}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid x:Name="MainGrid">
+        <Grid x:Name="SectionGrid" Grid.Row="1" Panel.ZIndex="-1" Height="60" Width="1160" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Ellipse x:Name="Onlipse" Margin="5,0,0,0" StrokeThickness="1" IsEnabled="False" IsHitTestVisible="False" Visibility="Visible" Height="50" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Panel.ZIndex="1">
+                <Ellipse.Fill>
+                    <SolidColorBrush Color="Green"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Ellipse x:Name="Dislipse" Margin="60,0,0,0" IsEnabled="False" IsHitTestVisible="False" Height="50" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Panel.ZIndex="1">
+                <Ellipse.Fill>
+                    <SolidColorBrush Color="Red"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Slider x:Name="master_vol"
+            Margin="246,0,0,0"
+            Orientation="Horizontal"
+            Minimum="0"
+            Maximum="1"
+            Value="{Binding Volume}" 
+            Grid.ColumnSpan="1"
+            VerticalAlignment="Center" HorizontalAlignment="Left" Width="178">
+            </Slider>
+
+            <Label Width="120" HorizontalAlignment="Left" Content="{Binding VolumeLabel}" Margin="119,30,0,0" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{Binding Background, ElementName=VOLUME_Label}" BorderThickness="5,0,0,5" Padding="0,0,0,0"  VerticalAlignment="Top" Foreground="#FF6A360F"/>
+            <Button x:Name="Off"
+              Margin="60,0,0,0"
+              Command="{Binding OffCommand}" BorderThickness="0,0,0,0" Padding="0,0,0,0" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="50" Panel.ZIndex="-1" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center"
+              >
+            </Button>
+            <Button x:Name="On"
+              Command="{Binding OnCommand}" Padding="0,0,0,0" BorderThickness="0,0,0,0" Margin="5,0,0,0" Panel.ZIndex="-1" Height="50" Foreground="{x:Null}" BorderBrush="{x:Null}" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center"
+              >
+            </Button>
+            <Border Width="240" HorizontalAlignment="Left" Height="60" BorderThickness="5,5,5,5" Panel.ZIndex="-2">
+            </Border>
+            <Label x:Name="VOLUME_Label"
+               Width="120"
+           Margin="119,0,0,0"
+               FontWeight="Bold"
+           HorizontalAlignment="Left"
+           Content="MASTER" VerticalAlignment="Center" BorderThickness="5,5,0,5" Padding="0,0,0,0" Height="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Panel.ZIndex="-1" FontSize="16">
+            </Label>
+            <Border Width="185" HorizontalAlignment="Left" Height="60" BorderThickness="7,5,0,5" Panel.ZIndex="-2" Margin="239,0,0,0">
+            </Border>
+            <Border Width="185" HorizontalAlignment="Left" Height="60" BorderThickness="7,5,0,5" Panel.ZIndex="-2" Margin="424,0,0,0">
+            </Border>
+            <Border Width="185" HorizontalAlignment="Left" Height="60" BorderThickness="7,5,0,5" Panel.ZIndex="-2" Margin="609,0,0,0">
+              
+            </Border>
+            <Border Width="247" HorizontalAlignment="Left" Height="60" BorderThickness="7,5,2,5" Panel.ZIndex="-2" Margin="794,0,0,0">
+            </Border>
+
+            <Border Width="121" HorizontalAlignment="Left" Height="60" BorderThickness="0,5,5,5" Panel.ZIndex="-2" Margin="1039,0,0,0">
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\repo\VST\AudioPlugSharp-0.4\vstbuild\CMakeFiles\e604bc8b8a7ce125951d634598844d01\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{DF9353DA-D7BB-38C2-8F07-E2CD0BF7D05E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

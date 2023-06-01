@@ -4,8 +4,11 @@ using NAudio.Wave.SampleProviders;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
+using System.Windows.Controls;
 using AudioPlugSharp;
 using AudioPlugSharpWPF;
+using System.Windows;
+
 namespace synthesizer 
 {
     public partial class MainWindowViewModel : AudioPluginWPF
@@ -29,16 +32,20 @@ namespace synthesizer
             // Unique 64bit ID for the plugin
             PluginID = 0x1E92758E710B4947;
             HasUserInterface = true;
+
+            EditorWidth = 1226;
+            EditorHeight = 633;
         }
-        AudioIOPort stereoOutput;
+        AudioIOPort monoOutput;
         public override void Initialize()
         {
             base.Initialize();
 
-            OutputPorts = new AudioIOPort[] { stereoOutput = new AudioIOPort("Stereo Output", EAudioChannelConfiguration.Stereo) };
+            OutputPorts = new AudioIOPort[] { monoOutput = new AudioIOPort("mono Output", EAudioChannelConfiguration.Mono) };
+
         }
 
-        private SynthWaveProvider[,] _oscillators = new SynthWaveProvider[3, 16];
+        private SynthWaveProvider[,] _oscillators = new SynthWaveProvider[3, 88];
         private VolumeSampleProvider _volControl;
         private MixingSampleProvider _mixer;
         private FFTSampleProvider _fftProvider;
@@ -61,13 +68,35 @@ namespace synthesizer
         public bool EnableLPF { get; set; }
         public bool EnableSubOsc { get; set; }
         public bool EnableVibrato { get; set; }
+        new public TestWindow EditorView { get; set; }
+        public double freq;
+        public double desiredNoteVolume;
+        public int midinote;
+        public override UserControl GetEditorView()
+        {
+            return new TestWindow();
+        }
+        public override void HandleNoteOn(int noteNumber, float velocity, int sampleOffset)
+        {
+            Logger.Log("Note on: " + noteNumber + " offset: " + sampleOffset);
 
+            freq = Math.Pow(2, (noteNumber - 69) / 12.0) * 440;
+            midinote = noteNumber;
+            desiredNoteVolume = velocity * 0.5f;
+
+        }
+        public override void HandleNoteOff(int noteNumber, float velocity, int sampleOffset)
+        {
+            Logger.Log("Note off: " + noteNumber + " offset: " + sampleOffset);
+
+            desiredNoteVolume = 0;
+        }
         public void KeyDown(KeyEventArgs e)
         {
             var keyVal = keyboard.IndexOf(e.Key);
-            if (keyVal > -1 && _oscillators[0,keyVal] is null)
+            if (midinote > -1 && _oscillators[0,midinote] is null)
             {
-                _oscillators[0, keyVal] = new SynthWaveProvider(Wavetype, 44100, keyVal, Level1)
+                _oscillators[0, midinote] = new SynthWaveProvider(Wavetype, 44100, midinote, Level1)
                 {
                     BaseFrequency = BaseFrequency,
                     AttackSeconds = Attack,
@@ -79,7 +108,7 @@ namespace synthesizer
                     EnableSubOsc = EnableSubOsc,
                 };
 
-                _oscillators[1, keyVal] = new SynthWaveProvider(Wavetype2, 44100, keyVal + Voice2Freq, Level2)
+                _oscillators[1, midinote] = new SynthWaveProvider(Wavetype2, 44100, midinote + Voice2Freq, Level2)
                 {
                     BaseFrequency = BaseFrequency,
                     AttackSeconds = Attack2,
@@ -91,7 +120,7 @@ namespace synthesizer
                     EnableSubOsc = EnableSubOsc,
                 };
 
-                _oscillators[2, keyVal] = new SynthWaveProvider(Wavetype3, 44100, keyVal + Voice3Freq, Level3)
+                _oscillators[2, midinote] = new SynthWaveProvider(Wavetype3, 44100, midinote + Voice3Freq, Level3)
                 {
                     BaseFrequency = BaseFrequency,
                     AttackSeconds = Attack3,
@@ -104,28 +133,28 @@ namespace synthesizer
                 };
 
                 _mixer.AddMixerInput(EnableLPF
-                    ? (ISampleProvider)new LowPassFilterSampleProvider(_oscillators[0, keyVal], CutOff, Q)
-                    : _oscillators[0, keyVal]);
+                    ? (ISampleProvider)new LowPassFilterSampleProvider(_oscillators[0, midinote], CutOff, Q)
+                    : _oscillators[0, midinote]);
                 _mixer.AddMixerInput(EnableLPF
-                    ? (ISampleProvider)new LowPassFilterSampleProvider(_oscillators[1, keyVal], CutOff, Q)
-                    : _oscillators[1, keyVal]);
+                    ? (ISampleProvider)new LowPassFilterSampleProvider(_oscillators[1, midinote], CutOff, Q)
+                    : _oscillators[1, midinote]);
                 _mixer.AddMixerInput(EnableLPF
-                    ? (ISampleProvider)new LowPassFilterSampleProvider(_oscillators[2, keyVal], CutOff, Q)
-                    : _oscillators[2, keyVal]);
+                    ? (ISampleProvider)new LowPassFilterSampleProvider(_oscillators[2, midinote], CutOff, Q)
+                    : _oscillators[2, midinote]);
             }
         }
 
         public void KeyUp(KeyEventArgs e)
         {
             var keyVal = keyboard.IndexOf(e.Key);
-            if (keyVal > -1)
+            if (midinote > -1)
             {
-                _oscillators[0, keyVal].Stop();
-                _oscillators[1, keyVal].Stop();
-                _oscillators[2, keyVal].Stop();
-                _oscillators[0, keyVal] = null;
-                _oscillators[1, keyVal] = null;
-                _oscillators[2, keyVal] = null;
+                _oscillators[0, midinote].Stop();
+                _oscillators[1, midinote].Stop();
+                _oscillators[2, midinote].Stop();
+                _oscillators[0, midinote] = null;
+                _oscillators[1, midinote] = null;
+                _oscillators[2, midinote] = null;
             }
         }
 
@@ -339,6 +368,41 @@ namespace synthesizer
 
                 ResetCanExecute();
             }
+        }
+        long samplesSoFar = 0;
+        public override void Process()
+        {
+            base.Process();
+
+            Span<double> outSamples = monoOutput.GetAudioBuffers()[0];
+            int currentSample = 0;
+            int nextSample = 0;
+
+            do
+            {
+                // Trigger any events at our current sample, and find out how many samples we have until there are more events
+                nextSample = Host.ProcessEvents();
+
+                Logger.Log("Process from " + currentSample + " to " + (nextSample - 1));
+
+                // Loop over the samples we have remaining until we need to trigger more events
+                for (int i = currentSample; i < nextSample; i++)
+                {       
+                // Сюда нужно какую-то хуйню блять передать чтобы фл блять слышало ебучий плагин блять сука нахуй нахуйсука блять пизда ааааааааааааааа
+                // Пока что оно выводит только ебучий синус а не наудио блять, нахуй я вообще это делаю сижу тут блять ааааа
+                // ррррррррррррррррррррррррррррррр
+                // У меня нет проблем кроме моей бошки 1000-7 я умер прости
+                // Я гуль
+                    outSamples[i] = Math.Sin(((double)samplesSoFar * 2 * Math.PI * freq) / Host.SampleRate) * 40;
+                    samplesSoFar++;
+                }
+                
+                currentSample = nextSample;
+            }
+            while (nextSample < outSamples.Length); // Continue looping until we hit the end of the buffer
+
+            // Write out our managed audio data
+            monoOutput.WriteData();
         }
     }
 }

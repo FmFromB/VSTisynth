@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\vstgui4\vstgui\tools\uidesccompressor\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\repo\VST\AudioPlugSharp-0.4\vst3sdk\vstgui4\vstgui\tools\uidesccompressor\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{DFF5BAED-7F22-3915-9D06-4CD30D60774C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

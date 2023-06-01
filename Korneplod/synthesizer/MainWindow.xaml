@@ -12,7 +12,7 @@
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="{x:Type TabItem}">
-            <Setter Property="Background" Value="{StaticResource WordBlueBrush}"/>
+            <Setter Property="Background" Value="SandyBrown"/>
         </Style>
         <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
             <Setter Property="SnapsToDevicePixels" Value="true" />
@@ -65,7 +65,6 @@
                                 <Border.OpacityMask>
                                     <ImageBrush ImageSource="/Visuals/metal.png"/>
                                 </Border.OpacityMask>
-
                             </Border>
                         </Border>
                     </ControlTemplate>
@@ -444,18 +443,18 @@
                     <Label x:Name="SlidersLabel" Content=""/>
 
                 </Grid>
-                <Grid x:Name="header" Panel.ZIndex="-1" Height="200" Width="{Binding ActualWidth, ElementName=tabControl, Mode=OneWay}" HorizontalAlignment="Left">
+                <!--<Grid x:Name="header" Panel.ZIndex="-1" Height="200" Width="{Binding ActualWidth, ElementName=tabControl, Mode=OneWay}" HorizontalAlignment="Left">
                     <local:WaveformVisualizer
       Waveform="{Binding Waveform}" Width="{Binding ActualWidth, ElementName=tabControl, Mode=OneWay}" Margin="0,-19,0,0" UseLayoutRounding="False" Cursor="Cross" RenderTransformOrigin="0.5,0.5" Height="{Binding ActualHeight, ElementName=header, Mode=OneWay}" Opacity="1"
       >
                         <local:WaveformVisualizer.Effect>
                             <DropShadowEffect/>
                         </local:WaveformVisualizer.Effect>
-                        <!--<local:WaveformVisualizer.Clip>
+                        <local:WaveformVisualizer.Clip>
                             <EllipseGeometry/>
-                        </local:WaveformVisualizer.Clip>-->
+                        </local:WaveformVisualizer.Clip>
                     </local:WaveformVisualizer>
-                </Grid>
+                </Grid>-->
                 <Grid x:Name="SectionGrid" Grid.Row="1" Panel.ZIndex="-1" Height="60" Width="1160" VerticalAlignment="Top" HorizontalAlignment="Left">
                     <Ellipse x:Name="Onlipse" Margin="5,0,0,0" StrokeThickness="1" IsEnabled="False" IsHitTestVisible="False" Visibility="Visible" Height="50" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Panel.ZIndex="1">
                         <Ellipse.Fill>
@@ -844,7 +843,7 @@
                     <RowDefinition Height="200" />
                     <RowDefinition Height="278.13" />
                 </Grid.RowDefinitions>
-                <local:WaveformVisualizer
+                <!-- <local:WaveformVisualizer
                     Waveform="{Binding Waveform}" 
                     Width="{Binding ActualWidth, ElementName=tabControl, Mode=OneWay}" 
                     Margin="0,-19,0,0" 
@@ -857,10 +856,10 @@
                     <local:WaveformVisualizer.Effect>
                         <DropShadowEffect/>
                     </local:WaveformVisualizer.Effect>
-                    <!--<local:WaveformVisualizer.Clip>
+                    <local:WaveformVisualizer.Clip>
                             <EllipseGeometry/>
-                        </local:WaveformVisualizer.Clip>-->
-                </local:WaveformVisualizer>
+                        </local:WaveformVisualizer.Clip>
+                </local:WaveformVisualizer>-->
                 <Grid x:Name="SectionGrid2" Grid.Row="1" Panel.ZIndex="-1" Height="60" Width="1160" VerticalAlignment="Top" HorizontalAlignment="Left">
                     <Slider x:Name="master_vol2" Style = "{StaticResource Horizontal_Slider}"
             Margin="246,0,0,0"
@@ -1097,20 +1096,21 @@
         </TabItem>
         <TabItem x:Name="OSC2" Header="OSC 2" Margin="0,-2,0,0" Padding="0,0,0,0" Width="50" BorderBrush="{Binding BorderBrush, ElementName=MainTab}" ClipToBounds="True" Foreground="#FFC88A59">
             <Grid VerticalAlignment="Top" Height="565">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3766" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="400" />
-                </Grid.RowDefinitions>
-                <local:WaveformVisualizer
+                <Grid VerticalAlignment="Top" Height="565">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3766" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="400" />
+                    </Grid.RowDefinitions>
+                    <!--<local:WaveformVisualizer
       Grid.Column="0"
       Grid.Row="0"
       Waveform="{Binding Waveform}" Margin="0,0,2606,200" Width="Auto"
                     
-      />
-                <Grid x:Name="SectionGrid3" Panel.ZIndex="-1" Height="60" Width="1160" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,200,0,0">
-                    <Slider x:Name="master_vol3" Style = "{StaticResource Horizontal_Slider}"
+      />-->
+                    <Grid x:Name="SectionGrid3" Panel.ZIndex="-1" Height="60" Width="1160" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,200,0,0">
+                        <Slider x:Name="master_vol3" Style = "{StaticResource Horizontal_Slider}"
             Margin="246,0,0,0"
             Orientation="Horizontal"
             Minimum="0"
@@ -1118,228 +1118,228 @@
             Value="{Binding Level3}" 
             Grid.ColumnSpan="1"
             VerticalAlignment="Center" HorizontalAlignment="Left" Width="173">
-                    </Slider>
+                        </Slider>
 
-                    <Label Width="120" HorizontalAlignment="Left" Content="{Binding Level3Label}" Margin="119,30,0,0" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{Binding Background, ElementName=VOLUME_Label}" BorderThickness="5,0,0,5" FontSize="{Binding FontSize, ElementName=VOLUME_Label}" Padding="0,0,0,0" FontFamily="{Binding FontFamily, ElementName=VOLUME_Label}" VerticalAlignment="Top" Foreground="#FF6A360F"/>
-                    <Label x:Name="VOLUME_Label3"
+                        <Label Width="120" HorizontalAlignment="Left" Content="{Binding Level3Label}" Margin="119,30,0,0" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{Binding Background, ElementName=VOLUME_Label}" BorderThickness="5,0,0,5" FontSize="{Binding FontSize, ElementName=VOLUME_Label}" Padding="0,0,0,0" FontFamily="{Binding FontFamily, ElementName=VOLUME_Label}" VerticalAlignment="Top" Foreground="#FF6A360F"/>
+                        <Label x:Name="VOLUME_Label3"
                Width="120"
            Margin="119,0,0,0"
                FontWeight="Bold"
            HorizontalAlignment="Left"
            Content="LEVEL" VerticalAlignment="Center" FontFamily="Arial Black" BorderThickness="5,5,0,5" Padding="0,0,0,0" Height="60" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Foreground="#FF6A360F" Panel.ZIndex="-1" FontSize="16">
-                    </Label>
-                </Grid>
-                <StackPanel
+                        </Label>
+                    </Grid>
+                    <StackPanel
                             Orientation="Vertical" Margin="245,300,3341,-49"
                             >
-                    <Label Content="WAVEFORM"
+                        <Label Content="WAVEFORM"
                Width="180"
                FontWeight="Bold" FontFamily="Arial Black" BorderThickness="1,1,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11" Margin="0,12,0,-150">
-                    </Label>
-                    <StackPanel Orientation="Horizontal"
+                        </Label>
+                        <StackPanel Orientation="Horizontal"
                         Width="180" Height="60" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,90,0,0" >
-                        <RadioButton x:Name="Sine3"
+                            <RadioButton x:Name="Sine3"
                          Margin="5,6,0,0"
                          GroupName="Waveform3"
                          IsChecked="true"
                          Checked="SetWaveForm"
                          VerticalAlignment="Top" Content="Sine" Width="43" Height="17" FontSize="10" Padding="0,0,0,0" FontFamily="Arial Black" BorderThickness="2,2,2,2.2" Background="{x:Null}">
-                        </RadioButton>
-                        <RadioButton x:Name="Square3"
+                            </RadioButton>
+                            <RadioButton x:Name="Square3"
                          Margin="-43,0,0,21"
                          GroupName="Waveform3"
                          Checked="SetWaveForm"
                          VerticalAlignment="Bottom" Content="Square" FontSize="10" Padding="0,0,0,0" FontFamily="Arial Black" Height="17" Width="59" BorderThickness="2,2,2,2.2" Background="{x:Null}">
-                        </RadioButton>
-                        <RadioButton x:Name="Saw3"
+                            </RadioButton>
+                            <RadioButton x:Name="Saw3"
                          Margin="25,6,0,0"
                          GroupName="Waveform3"
                          Checked="SetWaveForm"
                          VerticalAlignment="Top" Content="Saw" Width="42" Height="17" FontSize="10" Padding="0,0,-2,0" FontFamily="Arial Black" Background="{x:Null}" BorderThickness="2,2,2,2.2">
-                        </RadioButton>
-                        <RadioButton x:Name="Triangle3"
+                            </RadioButton>
+                            <RadioButton x:Name="Triangle3"
                          Margin="-42,0,0,21"
                          GroupName="Waveform3"
                          Checked="SetWaveForm"
                          VerticalAlignment="Bottom" Content="Triangle" FontSize="10" Padding="0,0,-2,0" FontFamily="Arial Black" Height="17" Width="61" BorderThickness="2,2,2,2.2" Background="{x:Null}">
-                        </RadioButton>
-                        <RadioButton x:Name="Whitenoise3"
+                            </RadioButton>
+                            <RadioButton x:Name="Whitenoise3"
                          Margin="-197,10,14,2"
                          GroupName="Waveform3"
                          Checked="SetWaveForm"
                          VerticalAlignment="Bottom" Content="White noise" FontFamily="Arial Black" FontSize="10" Padding="0,0,-2,0" Width="79" Height="20" Background="{x:Null}" BorderThickness="2,2,2,2.2">
-                        </RadioButton>
-                        <RadioButton x:Name="Pinknoise3"
+                            </RadioButton>
+                            <RadioButton x:Name="Pinknoise3"
                          Margin="-61,0,0,2"
                          GroupName="Waveform3"
                          Checked="SetWaveForm"
                          VerticalAlignment="Bottom" Content="Pink noise" Padding="0,0,-3,0" Width="74" Height="20" FontSize="10" FontFamily="Arial Black" BorderThickness="2,2,2,2.2" Background="{x:Null}">
-                        </RadioButton>
+                            </RadioButton>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
-                <Label Content="Envelope ADSR"  HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="2106,150,0,0"/>
-                <StackPanel Orientation="Horizontal" Margin="0,260,3526,100" Height="40">
-                    <Label x:Name="Attack3"
+                    <Label Content="Envelope ADSR"  HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="2106,150,0,0"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,260,3526,100" Height="40">
+                        <Label x:Name="Attack3"
                Width="60"
            Margin="0,0,0,0"
                FontWeight="Bold"
            HorizontalAlignment="Left"
            Content="ATTACK" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
-                    </Label>
-                    <Label x:Name="AttackVol3"
+                        </Label>
+                        <Label x:Name="AttackVol3"
                Width="60"
            Margin="-60,0,0,0"
                FontWeight="Bold"
            Content="{Binding Attack3Label}" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" HorizontalAlignment="Left">
-                    </Label>
-                    <Label x:Name="Decay3"
+                        </Label>
+                        <Label x:Name="Decay3"
                Width="60"
            Margin="0,0,0,0"
                FontWeight="Bold"
            HorizontalAlignment="Left"
            Content="DECAY" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
-                    </Label>
-                    <Label x:Name="DecayVol3"
+                        </Label>
+                        <Label x:Name="DecayVol3"
                Width="60"
            Margin="-60,0,0,0"
                FontWeight="Bold"
            Content="{Binding Decay3Label}" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" HorizontalAlignment="Left">
-                    </Label>
-                    <Label x:Name="Sustain3"
+                        </Label>
+                        <Label x:Name="Sustain3"
                Width="60"
            Margin="0,0,0,0"
                FontWeight="Bold"
            HorizontalAlignment="Left"
            Content="SUSTAIN" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
-                    </Label>
-                    <Label x:Name="SustainVol3"
+                        </Label>
+                        <Label x:Name="SustainVol3"
                Width="60"
            Margin="-60,0,0,0"
                FontWeight="Bold"
            Content="{Binding Sustain3Label}" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16">
-                    </Label>
-                    <Label x:Name="Release3"
+                        </Label>
+                        <Label x:Name="Release3"
                Width="60"
            Margin="0,0,0,0"
                FontWeight="Bold"
            HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
-                        <Label x:Name="Release3_Copy"
+                            <Label x:Name="Release3_Copy"
                             Width="60"
                             FontWeight="Bold"
                             Content="RELEASE" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11" Margin="-1,-1,0,0">
+                            </Label>
                         </Label>
-                    </Label>
-                    <Label x:Name="ReleaseVol3"
+                        <Label x:Name="ReleaseVol3"
                Width="60"
            Margin="-60,0,0,0"
                FontWeight="Bold"
            Content="{Binding Release3Label}" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="1,0,1,1" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16">
-                    </Label>
-                </StackPanel>
-                <Border Margin="0,0,0,-50" Width="240" Height="190" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderThickness="1,1,1,1" Panel.ZIndex="-1">
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,39,-1,-1" Height="150">
-                        <Slider x:Name="attack3" Style="{StaticResource Horizontal_Slider}"
+                        </Label>
+                    </StackPanel>
+                    <Border Margin="0,0,0,-50" Width="240" Height="190" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderThickness="1,1,1,1" Panel.ZIndex="-1">
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,39,-1,-1" Height="150">
+                            <Slider x:Name="attack3" Style="{StaticResource Horizontal_Slider}"
                 Orientation="Horizontal"
                 Minimum="0.0"
                 Maximum="5.0"
                 Value="{Binding Attack3}" Width="150" Height="30" Margin="15,-2,0,0" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" >
-                            <Slider.LayoutTransform>
-                                <TransformGroup>
-                                    <RotateTransform Angle="270"/>
-                                </TransformGroup>
-                            </Slider.LayoutTransform>
-                        </Slider>
-                        <Slider x:Name="decay3" Margin="30,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                                <Slider.LayoutTransform>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="270"/>
+                                    </TransformGroup>
+                                </Slider.LayoutTransform>
+                            </Slider>
+                            <Slider x:Name="decay3" Margin="30,-2,0,0" Style="{StaticResource Horizontal_Slider}"
                 Orientation="Horizontal"
                 Minimum="0.0"
                 Maximum="2.0"
                 Value="{Binding Decay3}" RenderTransformOrigin="3.481,0.512" Width="150" VerticalAlignment="Stretch" Height="30">
-                            <Slider.LayoutTransform>
-                                <TransformGroup>
-                                    <RotateTransform Angle="270"/>
-                                </TransformGroup>
-                            </Slider.LayoutTransform>
-                        </Slider>
+                                <Slider.LayoutTransform>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="270"/>
+                                    </TransformGroup>
+                                </Slider.LayoutTransform>
+                            </Slider>
 
-                        <Slider x:Name="sustain3" Margin="30,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                            <Slider x:Name="sustain3" Margin="30,-2,0,0" Style="{StaticResource Horizontal_Slider}"
                 Orientation="Horizontal"
                 Minimum="0.0"
                 Maximum="1.0"
                 Value="{Binding Sustain3}" HorizontalAlignment="Left" Width="150" Height="30">
-                            <Slider.LayoutTransform>
-                                <TransformGroup>
-                                    <RotateTransform Angle="270"/>
-                                </TransformGroup>
-                            </Slider.LayoutTransform>
-                        </Slider>
+                                <Slider.LayoutTransform>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="270"/>
+                                    </TransformGroup>
+                                </Slider.LayoutTransform>
+                            </Slider>
 
-                        <Slider x:Name="release3"  Margin="30,-2,0,0" Style="{StaticResource Horizontal_Slider}"
+                            <Slider x:Name="release3"  Margin="30,-2,0,0" Style="{StaticResource Horizontal_Slider}"
                 Orientation="Horizontal"
                 Minimum="0.03"
                 Maximum="5.0"
                 Value="{Binding Release3}" Width="150" VerticalAlignment="Stretch" HorizontalAlignment="Left" Height="30">
-                            <Slider.LayoutTransform>
-                                <TransformGroup>
-                                    <RotateTransform Angle="270"/>
-                                </TransformGroup>
-                            </Slider.LayoutTransform>
-                        </Slider>
-                    </StackPanel>
-                </Border>
-                <Grid x:Name="footer3" Margin="0,0,0,-90" Width="{Binding ActualWidth, ElementName=tabControl, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                    <Border Width="240" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1,1,1,1">
-                        <Label Content="Envelope ADSR"  HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,0,0" FontFamily="Arial Black" Foreground="#FFC88A59" FontSize="18"/>
+                                <Slider.LayoutTransform>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="270"/>
+                                    </TransformGroup>
+                                </Slider.LayoutTransform>
+                            </Slider>
+                        </StackPanel>
                     </Border>
-                    <Border Width="180" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1,1,1,1" Margin="245,0,0,0">
-                        <Label Content="Tonality"  HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,0,0" FontFamily="Arial Black" Foreground="#FFC88A59" FontSize="18"/>
-                    </Border>
+                    <Grid x:Name="footer3" Margin="0,0,0,-90" Width="{Binding ActualWidth, ElementName=tabControl, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        <Border Width="240" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1,1,1,1">
+                            <Label Content="Envelope ADSR"  HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,0,0" FontFamily="Arial Black" Foreground="#FFC88A59" FontSize="18"/>
+                        </Border>
+                        <Border Width="180" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1,1,1,1" Margin="245,0,0,0">
+                            <Label Content="Tonality"  HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,0,0" FontFamily="Arial Black" Foreground="#FFC88A59" FontSize="18"/>
+                        </Border>
 
-                </Grid>
-                <Border Margin="245,0,0,-50" Width="180" Height="190" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderThickness="1,1,1,1" Panel.ZIndex="-1">
-                    <StackPanel Orientation="Horizontal" Margin="-1,-1,0,149" Grid.Row="1" Height="40">
-                        <Label Content="OCTAVE"
+                    </Grid>
+                    <Border Margin="245,0,0,-50" Width="180" Height="190" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderThickness="1,1,1,1" Panel.ZIndex="-1">
+                        <StackPanel Orientation="Horizontal" Margin="-1,-1,0,149" Grid.Row="1" Height="40">
+                            <Label Content="OCTAVE"
                Width="90"
            Margin="0,0,0,0"
                FontWeight="Bold" VerticalAlignment="Top" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11">
-                        </Label>
-                        <ComboBox x:Name="Semitone1" Width="90"
+                            </Label>
+                            <ComboBox x:Name="Semitone1" Width="90"
                               SelectionChanged="Semitone3_SelectionChanged" Background="{x:Null}" Padding="10,3,0,0" FontFamily="Arial Black" FontSize="12" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,0" BorderThickness="0,0,0,0" HorizontalContentAlignment="Center">
-                            <ComboBoxItem  IsSelected="True" Content="+0"/>
-                            <ComboBoxItem Content="+1"/>
-                            <ComboBoxItem Content="+2"/>
-                            <ComboBoxItem Content="+3"/>
-                            <ComboBoxItem Content="+4"/>
-                            <ComboBoxItem Content="+5"/>
-                            <ComboBoxItem Content="+6"/>
-                            <ComboBoxItem Content="+7"/>
-                            <ComboBoxItem Content="+8"/>
-                            <ComboBoxItem Content="+9"/>
-                            <ComboBoxItem Content="+10"/>
-                            <ComboBoxItem Content="+11"/>
-                            <ComboBoxItem Content="+12"/>
+                                <ComboBoxItem  IsSelected="True" Content="+0"/>
+                                <ComboBoxItem Content="+1"/>
+                                <ComboBoxItem Content="+2"/>
+                                <ComboBoxItem Content="+3"/>
+                                <ComboBoxItem Content="+4"/>
+                                <ComboBoxItem Content="+5"/>
+                                <ComboBoxItem Content="+6"/>
+                                <ComboBoxItem Content="+7"/>
+                                <ComboBoxItem Content="+8"/>
+                                <ComboBoxItem Content="+9"/>
+                                <ComboBoxItem Content="+10"/>
+                                <ComboBoxItem Content="+11"/>
+                                <ComboBoxItem Content="+12"/>
 
-                        </ComboBox>
-                        <Border Width="90" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-180,0,0,0" BorderThickness="1,0,1,1" Panel.ZIndex="1" Cursor="ScrollS">
-                        </Border>
-                        <Border x:Name="Semitone2" Width="90" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-90,0,0,0" BorderThickness="1,0,1,1" Panel.ZIndex="1" Cursor="ScrollS">
-                        </Border>
-                        <ComboBox x:Name="Octave1" Width="90" 
+                            </ComboBox>
+                            <Border Width="90" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-180,0,0,0" BorderThickness="1,0,1,1" Panel.ZIndex="1" Cursor="ScrollS">
+                            </Border>
+                            <Border x:Name="Semitone2" Width="90" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="-90,0,0,0" BorderThickness="1,0,1,1" Panel.ZIndex="1" Cursor="ScrollS">
+                            </Border>
+                            <ComboBox x:Name="Octave1" Width="90" 
                               HorizontalAlignment="Left"
                               SelectionChanged="Octave3_SelectionChanged" Background="{x:Null}" FontSize="12" Foreground="Black" IsSynchronizedWithCurrentItem="True" Cursor="UpArrow" HorizontalContentAlignment="Center" Padding="10,3,0,0" Height="20" Margin="-180,0,0,0" VerticalAlignment="Bottom" FontFamily="Arial Black" BorderThickness="0,0,0,0">
-                            <ComboBoxItem  IsSelected="True" Content="+0"/>
-                            <ComboBoxItem Content="+1"/>
-                            <ComboBoxItem Content="+2"/>
+                                <ComboBoxItem  IsSelected="True" Content="+0"/>
+                                <ComboBoxItem Content="+1"/>
+                                <ComboBoxItem Content="+2"/>
 
-                        </ComboBox>
-                        <Label
+                            </ComboBox>
+                            <Label
                             Width="90"
                             FontWeight="Bold"
                             Content="SEMITONE" FontFamily="Arial Black" BorderThickness="1,1,1,0" Padding="0,0,0,0" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11" VerticalAlignment="Top" Margin="-90,0,0,0">
-                        </Label>
-                    </StackPanel>
-                </Border>
+                            </Label>
+                        </StackPanel>
+                    </Border>
+                </Grid>
             </Grid>
-
         </TabItem>
     </TabControl>
 
